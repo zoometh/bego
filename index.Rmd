@@ -25,28 +25,20 @@ GHimgs <- "https://github.com/zoometh/C14/tree/main/docs/imgs/"
 # f.lflt.chef(getwd()) # create leaflet html map of the CdT
 ```
 
+## *Roche de l'Homme aux bras en zigzag* (Zone IV, Groupe III, Roche 16D)
+
+In the Arpette sector lies the *Roche de l'Homme aux bras en zigzag* 
+
+```{r lf.HBZZ}
+# load the lf map from img/CdT.html
+# knitr::include_url("https://yihui.shinyapps.io/miniUI/")
+# knitr::include_app(paste0(getwd(),"/img/m.html"), height = '600px')
+htmltools::includeHTML(paste0(getwd(),"/img/ZIVGIIIR16D.html"))
+```
+
 ## *Stèle du Chef de Tribu* (Zone VII, Groupe I, Roche 8)
 
 In the vallées de Merveilles lies the unique stelae of the site, the so-called *Stèle du Chef de Tribu*
-
-```{r 3Dpdf, out.width="0.3\\linewidth", include=TRUE, fig.align="center", fig.cap=c("your caption"), echo=FALSE}
-# knitr::include_graphics("./img/CdT.pdf") # not working
-# # cuber=read.obj(paste0(getwd(),"./img/ptHBZZ.obj"), # not working
-# 
-# 
-# library(geomorph)
-# data(scallopPLY) 
-# myply <- scallopPLY$ply
-# myply$material$color <- "gray" # using color word
-# myply$material$color <- "#FCE6C9" # using RGB code
-# 
-# # library(plotly)
-# # fig <- plot_ly(myply)
-# plotspec(myply)
-
-```
-
-<!-- knitr::include_url("https://yihui.shinyapps.io/miniUI/") -->
 
 
 ### Map 

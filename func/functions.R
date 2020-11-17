@@ -17,7 +17,7 @@ f.lflt.chef <- function(chm){
                    user="postgres",
                    password="postgres")
   sqll <- "select zone,groupe,roche,nom,histoseule,geographie ,ST_X(ST_Transform(wkb_geometry, 4326)) as x ,ST_Y(ST_Transform(wkb_geometry, 4326)) as y from roches_gravees"
-  sqll <- paste0(sqll," where zone>0 and zone<13") # Me
+  # sqll <- paste0(sqll," where zone>0 and zone<13") # Me
   roches.Me <- dbGetQuery(con,sqll)
   stele.chef <- roches.Me[roches.Me$zone == 7 & roches.Me$groupe == 1 & roches.Me$roche == '8',]
   stele.chef.lk <- drop_media("Bego/Images/Images Faces/ZVII/ZVIIGI/ZVIIGIR8.gif")
@@ -45,6 +45,61 @@ f.lflt.chef <- function(chm){
   # setwd("..") # up in the folder
   saveWidget(CdT, file=paste0(chm,"/img/CdT.html"))
 }
+
+tab.latin <- data.frame(arabe=c(1:12),
+                        latin=c("I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"),
+                        stringsAsFactors = F)
+
+
+f.lflt.aRoche <- function(chm,Z,G,R){
+  # create leaflet obj for the chef de tribu and sect Me
+  drv <- dbDriver("PostgreSQL")
+  con <- dbConnect(drv,
+                   dbname="bego",
+                   host="localhost",
+                   port=5432,
+                   user="postgres",
+                   password="postgres")
+  sqll <- "select zone,groupe,roche,nom,histoseule,geographie ,ST_X(ST_Transform(wkb_geometry, 4326)) as x ,ST_Y(ST_Transform(wkb_geometry, 4326)) as y from roches_gravees"
+  roches.all <- dbGetQuery(con,sqll)
+  aRoche <- roches.all[roches.all$zone == Z & roches.all$groupe == G & roches.all$roche == R,]
+  # transcript
+  # Z <- 7 ; G <- 1 ; R <- 8
+  aZ <- tab.latin[tab.latin$arabe == Z,"latin"]
+  aG <- tab.latin[tab.latin$arabe == G,"latin"]
+  aR <- as.character(R)
+  aRocheName <- paste0("Z",aZ,"G",aG,"R",aR)
+  aPath <- paste0("Bego/Images/Images Faces/Z",aZ,"/Z",aZ,"G",aG,"/Z",aZ,"G",aG,"R",aR,".gif")
+  aImg <- drop_media(aPath)
+  # stele.chef.lk <- drop_media("Bego/Images/Images Faces/ZVII/ZVIIGI/ZVIIGIR8.gif")
+  Plan_lk <- paste0('<img src="',
+                    # stele.chef.lk,
+                    aImg,
+                    '" style="width: 55vw; max-width: 200px;" >')
+  dbDisconnect(con)
+  CdT <- leaflet(width = "50%") %>%
+    setView(lng = aRoche$x, lat = aRoche$y, zoom=18) %>%
+    addTiles() %>%  # Add default OpenStreetMap map tiles
+    addCircleMarkers(lng=roches.all$x, lat=roches.all$y,
+                     popup="roche gravée",radius = 1,opacity = 0.3) %>%
+    addCircleMarkers(lng=aRoche$x, lat=aRoche$y,
+                     # label = ~lapply(paste0("<b>","Stèle du chef de tribu","</b> <br>",
+                     #                            Plan_lk),
+                     #                     htmltools::HTML),
+                     # popup="Stèle du chef de tribu",
+                     popup = Plan_lk,
+                     # popup = paste0("<img src = ", Plan_lk, ">","<br>",Plan_lk),
+                     # label = ~lapply(paste0("<b>",as.character("stele.chef"),"</b> <br>",
+                     #                        Plan_lk),
+                     # htmltools::HTML),
+                     color = "red",
+                     radius = 2,
+                     opacity = 0.7)
+  # m
+  # setwd("..") # up in the folder
+  saveWidget(CdT, file=paste0(chm,"/img/",aRocheName,".html"))
+}
+
 
 f.bego.plan <- function(roches.xy){
   # load plan from GDropBox
