@@ -3,8 +3,8 @@ title: "Bego"
 author: "Thomas Huet"
 date: "11/12/2020"
 header-includes:
-  - \usepackage{float}
-  - \floatplacement{figure}{H}  #make every figure with capti
+  # - \usepackage{float}
+  # - \floatplacement{figure}{H}  #make every figure with capti
 output: html_document
 ---
 
@@ -18,6 +18,7 @@ library(magick)
 library(leaflet)
 library(RPostgreSQL)
 library(rdrop2)
+library(rgl)
 
 GHimgs <- "https://github.com/zoometh/C14/tree/main/docs/imgs/"
 # source("func/functions.R") # load/run ? function
@@ -28,12 +29,33 @@ GHimgs <- "https://github.com/zoometh/C14/tree/main/docs/imgs/"
 
 In the vallées de Merveilles lies the unique stelae of the site, the so-called *Stèle du Chef de Tribu*
 
+```{r 3Dpdf, out.width="0.3\\linewidth", include=TRUE, fig.align="center", fig.cap=c("your caption"), echo=FALSE}
+# knitr::include_graphics("./img/CdT.pdf") # not working
+# # cuber=read.obj(paste0(getwd(),"./img/ptHBZZ.obj"), # not working
+# 
+# 
+# library(geomorph)
+# data(scallopPLY) 
+# myply <- scallopPLY$ply
+# myply$material$color <- "gray" # using color word
+# myply$material$color <- "#FCE6C9" # using RGB code
+# 
+# # library(plotly)
+# # fig <- plot_ly(myply)
+# plotspec(myply)
+
+```
+
+knitr::include_url("https://yihui.shinyapps.io/miniUI/")
+
+
 ### Map 
 
-```{r bego_stele_chef, out.width="100%"}
+```{r lf.CdT, out.width="100%"}
 # load the lf map from img/CdT.html
-# knitr::include_url(paste0(getwd(),"/img/m.html"), height="500px")
-htmltools::includeHTML(paste0(getwd(),"/img/m.html"))
+# knitr::include_url("https://yihui.shinyapps.io/miniUI/")
+# knitr::include_app(paste0(getwd(),"/img/m.html"), height = '600px')
+# htmltools::includeHTML(paste0(getwd(),"/img/m.html"))
 ```
 
 This is really important..

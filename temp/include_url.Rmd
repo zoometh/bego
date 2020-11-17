@@ -1,0 +1,22 @@
+---
+title: "test"
+author: "Michael Dorman"
+date: "May 1, 2019"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## R Markdown
+
+```{r}
+knitr::include_url("https://neolithic.shinyapps.io/NeoNet/")
+```
+
+```{r}
+knitr::include_graphics("https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2.png")
+```
