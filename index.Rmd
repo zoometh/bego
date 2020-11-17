@@ -53,7 +53,7 @@ knitr::include_url("https://yihui.shinyapps.io/miniUI/")
 
 ```{r lf.CdT, out.width="100%"}
 # load the lf map from img/CdT.html
-# knitr::include_url("https://yihui.shinyapps.io/miniUI/")
+knitr::include_url("https://yihui.shinyapps.io/miniUI/")
 # knitr::include_app(paste0(getwd(),"/img/m.html"), height = '600px')
 # htmltools::includeHTML(paste0(getwd(),"/img/m.html"))
 ```
