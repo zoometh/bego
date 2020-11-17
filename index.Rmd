@@ -46,16 +46,16 @@ In the vallées de Merveilles lies the unique stelae of the site, the so-called 
 
 ```
 
-knitr::include_url("https://yihui.shinyapps.io/miniUI/")
+<!-- knitr::include_url("https://yihui.shinyapps.io/miniUI/") -->
 
 
 ### Map 
 
-```{r lf.CdT, out.width="100%"}
+```{r lf.CdT}
 # load the lf map from img/CdT.html
-knitr::include_url("https://yihui.shinyapps.io/miniUI/")
+# knitr::include_url("https://yihui.shinyapps.io/miniUI/")
 # knitr::include_app(paste0(getwd(),"/img/m.html"), height = '600px')
-# htmltools::includeHTML(paste0(getwd(),"/img/m.html"))
+htmltools::includeHTML(paste0(getwd(),"/img/CdT.html"))
 ```
 
 This is really important..
