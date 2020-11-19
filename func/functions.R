@@ -77,11 +77,12 @@ f.lflt.aRoche <- function(chm,Z,G,R){
                     aImg,
                     '" style="width: 55vw; max-width: 200px;" >')
   dbDisconnect(con)
-  CdT <- leaflet(width = "50%") %>%
+  aRoche  <- leaflet(width = "50%") %>%
     setView(lng = aRoche$x, lat = aRoche$y, zoom=18) %>%
     addTiles() %>%  # Add default OpenStreetMap map tiles
+    # all rocks
     addCircleMarkers(lng=roches.all$x, lat=roches.all$y,
-                     popup="roche gravée",radius = 1,opacity = 0.3) %>%
+                     popup="engraved<br>rock",radius = 1,opacity = 0.3) %>%
     addCircleMarkers(lng=aRoche$x, lat=aRoche$y,
                      # label = ~lapply(paste0("<b>","Stèle du chef de tribu","</b> <br>",
                      #                            Plan_lk),
@@ -97,7 +98,59 @@ f.lflt.aRoche <- function(chm,Z,G,R){
                      opacity = 0.7)
   # m
   # setwd("..") # up in the folder
-  saveWidget(CdT, file=paste0(chm,"/img/",aRocheName,".html"))
+  saveWidget(aRoche, file=paste0(chm,"/img/",aRocheName,".html"))
+}
+
+f.lflt.Bego <- function(chm){
+  # create leaflet obj for the chef de tribu and sect Me
+  drv <- dbDriver("PostgreSQL")
+  con <- dbConnect(drv,
+                   dbname="bego",
+                   host="localhost",
+                   port=5432,
+                   user="postgres",
+                   password="postgres")
+  sqll <- "select zone,groupe,roche,nom,histoseule,geographie ,ST_X(ST_Transform(wkb_geometry, 4326)) as x ,ST_Y(ST_Transform(wkb_geometry, 4326)) as y from roches_gravees"
+  roches.all <- dbGetQuery(con,sqll)
+  # label
+  roches.all$lbl <- paste0(roches.all$zone,".",
+                           roches.all$groupe,".",
+                           roches.all$roche,".")
+  # load zones
+  library(rpostgis)
+  zones <- pgGetGeom(con,
+                     c("public", "zones"),
+                     geom = "geom",
+                     gid = "gid",
+                     other.cols = c("secteur"),
+                     clauses  = "WHERE secteur not like ''")
+  # reproject
+  wgs84 <- CRS("+proj=longlat +datum=WGS84")
+  zones <- spTransform(zones, wgs84)
+  plot(zones)
+  # require(rgdal)
+  # dsn="PG:dbname='bego'"
+  # ogrListLayers(dsn)
+  # polys = readOGR(dsn=dsn,"zones",)
+  # sqll.zones <- "select "
+  dbDisconnect(con)
+  Bego <- leaflet(width = "50%") %>%
+    addTiles() %>%  # Add default OpenStreetMap map tiles
+    # secteurs
+    addPolygons(data = zones,
+                popup= ~secteur,
+                stroke = TRUE,
+                color = "#000000",
+                weight = 2,
+                fillOpacity = 0,
+                smoothFactor = 0.5) %>% 
+    # all rocks
+    addCircleMarkers(lng=roches.all$x,
+                     lat=roches.all$y,
+                     popup=roches.all$lbl,
+                     radius = 0.5,
+                     opacity = 0.3)
+  saveWidget(Bego, file=paste0(chm,"/img/Bego.html"))
 }
 
 
