@@ -25,6 +25,19 @@ GHimgs <- "https://github.com/zoometh/C14/tree/main/docs/imgs/"
 # f.lflt.chef(getwd()) # create leaflet html map of the CdT
 ```
 
+# The site
+
+## Sectors
+
+```{r lf.Sectors}
+# load the lf map from img/CdT.html
+# knitr::include_url("https://yihui.shinyapps.io/miniUI/")
+# knitr::include_app(paste0(getwd(),"/img/m.html"), height = '600px')
+htmltools::includeHTML(paste0(getwd(),"/img/Bego.html"))
+```
+
+# Impressive rocks
+
 ## *Roche de l'Homme aux bras en zigzag* (Zone IV, Groupe III, Roche 16D)
 
 In the Arpette sector lies the *Roche de l'Homme aux bras en zigzag* 

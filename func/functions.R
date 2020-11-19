@@ -6,6 +6,7 @@ library(magick)
 library(leaflet)
 library(RPostgreSQL)
 library(rdrop2)
+library(sp)
 
 f.lflt.chef <- function(chm){
   # create leaflet obj for the chef de tribu and sect Me
@@ -102,7 +103,7 @@ f.lflt.aRoche <- function(chm,Z,G,R){
 }
 
 f.lflt.Bego <- function(chm){
-  # create leaflet obj for the chef de tribu and sect Me
+  # create leaflet obj for the Bego zones
   drv <- dbDriver("PostgreSQL")
   con <- dbConnect(drv,
                    dbname="bego",
