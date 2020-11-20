@@ -23,6 +23,9 @@ library(plotly)
 
 GHimgs <- "https://github.com/zoometh/C14/tree/main/docs/imgs/"
 
+df.corresp.sect <- data.frame(LabelSect=c("Me","Fo","Vr","Sm","Cs","Vm","Go","Vb"),
+                              sectors=c("Les Merveilles","Fontananlba","Valaurette",                                                                      "Sainte-Marie","Valmasque","Col du Sabion","Gordolasque","Vei del Bouc"),
+                              stringsAsFactors = F)
 df.corresp.thm <- data.frame(prem=c("A","C","F","H","N","P","R","T","X"),
                              thm=c("Axes/Tools","Horned fig.","Halberd","Anthropomorph",
                                    "Unfigurative","Dagger","Reticulated/Topographic","Yoke",
@@ -36,18 +39,31 @@ thm.not.selected <- c("A","N","X")
 
 # The site
 
-The site is divided into 7 sectors
+The site is divided into 7 sectors. Main ones are [**Les Merveilles** sector][] and [**Fontanalba** sector][]
+
+```{r df.Sectors}
+roches <- read.table("img/ROCHES.csv", sep = ";", header = T, stringsAsFactors = F)
+# merge to get full names of sectors
+roches <- merge(roches,df.corresp.sect,by="LabelSect",all.x = TRUE)
+sect.roches.count <- roches %>%
+  group_by(sectors) %>%
+  summarise(nb.rocks=n())
+# order
+sect.roches.count <- sect.roches.count[with(sect.roches.count, order(-nb.rocks)), ]
+kable(sect.roches.count,"html") %>%
+  kable_styling(full_width = FALSE, position = "center", font_size=12)
+
+```
+
+The entire site is about 900 ha, with the large majority of engraved rocks in the France territory but also a sector in between France and Italy (**Col du Sabion** sector) and a rock in Italy (**Vei del Bouc** sector)  
 
 ```{r lf.Sectors}
-# load the lf map from img/CdT.html
-# knitr::include_url("https://yihui.shinyapps.io/miniUI/")
-# knitr::include_app(paste0(getwd(),"/img/m.html"), height = '600px')
 htmltools::includeHTML(paste0(getwd(),"/img/Bego.html"))
 ```
 
 ## The engravings
 
-Figuratives:
+There's about 20,000 figuratives pecked engravings
 
 ```{r lf.figures, fig.width=7, fig.height=5}
 # TODO: color chart by c'colors' field
@@ -73,6 +89,13 @@ fig.count <- figures.prem.sum %>%
 fig.count
 ```
 
+The Zone 13 (**Valaurette** sector) shows a distinctive profile with almost only topographic figure
+
+## Altitudes
+
+<!-- roches$lbl.r <- paste0(roches$zone,'.',roches$groupe,'.',roches$roche) -->
+<!-- figures$lbl.r <- paste0(figures$zone,'.',figures$groupe,'.',figures$roche) -->
+
 # Impressive rocks
 
 ## *Roche de l'Homme aux bras en zigzag* (Zone IV, Groupe III, Roche 16D)
@@ -91,14 +114,21 @@ htmltools::includeHTML(paste0(getwd(),"/img/ZIVGIIIR16D.html"))
 In the vallées de Merveilles lies the unique stelae of the site, the so-called *Stèle du Chef de Tribu*
 
 
-### Map 
-
 ```{r lf.CdT}
 # load the lf map from img/CdT.html
 # knitr::include_url("https://yihui.shinyapps.io/miniUI/")
 # knitr::include_app(paste0(getwd(),"/img/m.html"), height = '600px')
-htmltools::includeHTML(paste0(getwd(),"/img/CdT.html"))
+htmltools::includeHTML(paste0(getwd(),"/img/ZVIIGIR8.html"))
 ```
+
+
+## Sectors
+
+### **Les Merveilles** sector
+
+This is really important..
+
+### **Fontanalba** sector
 
 This is really important..
 
