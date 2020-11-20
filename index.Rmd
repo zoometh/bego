@@ -21,47 +21,56 @@ library(rdrop2)
 library(rgl)
 library(plotly)
 
-
 GHimgs <- "https://github.com/zoometh/C14/tree/main/docs/imgs/"
+
+df.corresp.thm <- data.frame(prem=c("A","C","F","H","N","P","R","T","X"),
+                             thm=c("Axes/Tools","Horned fig.","Halberd","Anthropomorph",
+                                   "Unfigurative","Dagger","Reticulated/Topographic","Yoke",
+                                   "Special fig."),
+                             colors=c("green","red","lightgreen","blue","grey",                                                                                  "darkgreen","yellow","orange","darkgrey"),
+                             stringsAsFactors = F)
+thm.not.selected <- c("A","N","X")
 # source("func/functions.R") # load/run ? function
 # f.lflt.chef(getwd()) # create leaflet html map of the CdT
 ```
 
 # The site
 
-## The engravings
-
-Figuratives:
-
-```{r lf.figures, fig.width=7, fig.height=5}
-# load the lf map from img/CdT.html
-# knitr::include_url("https://yihui.shinyapps.io/miniUI/")
-# knitr::include_app(paste0(getwd(),"/img/m.html"), height = '600px')
-# htmltools::includeHTML(paste0(getwd(),"/img/figures_count_by_zones.html"))
-figures <- read.table("img/FIGURES.csv",sep = ",",header = T)
-figures$zone <- as.factor(figures$zone)
-figures$prem <- toupper(figures$prem)
-# figures.prem.sum <- figures.prem.sum[!is.na(figures.prem.sum$prem),] # rm NA
-figures.prem.sum <- figures %>% count(prem, zone)
-figures.prem.sum <- figures.prem.sum[figures.prem.sum$prem != '',] # rm NA
-figures.prem.sum <- figures.prem.sum[figures.prem.sum$prem != 'N',] # rm N
-# table(zone = figures.prem.sum$zone, figures.prem.sum$prem)
-
-fig.count <- figures.prem.sum %>%
-  plot_ly(x = ~zone, y = ~n, type = 'bar', 
-          name = ~prem, color = ~prem) %>%
-  layout(yaxis = list(title = 'Count'), barmode = 'stack')
-# htmlwidgets::saveWidget(as_widget(fig.count),paste0(chm,"/img/figures_count_by_zones.html"))
-fig.count
-```
-
-## Sectors
+The site is divided into 7 sectors
 
 ```{r lf.Sectors}
 # load the lf map from img/CdT.html
 # knitr::include_url("https://yihui.shinyapps.io/miniUI/")
 # knitr::include_app(paste0(getwd(),"/img/m.html"), height = '600px')
 htmltools::includeHTML(paste0(getwd(),"/img/Bego.html"))
+```
+
+## The engravings
+
+Figuratives:
+
+```{r lf.figures, fig.width=7, fig.height=5}
+# TODO: color chart by c'colors' field
+figures <- read.table("img/FIGURES.csv", sep = ",", header = T, stringsAsFactors = F)
+figures$zone <- as.factor(figures$zone)
+figures$prem <- toupper(figures$prem)
+figures.prem.sum <- figures %>% count(prem, zone)
+figures.prem.sum <- figures.prem.sum[figures.prem.sum$prem != '',] # rm NA
+figures.prem.sum <- figures.prem.sum[!(figures.prem.sum$prem %in% thm.not.selected),] # rm N
+# merge to get thm fullname and colors
+figures.prem.sum <- merge(figures.prem.sum,df.corresp.thm,by="prem",all.x=T)
+figures.prem.sum$lbl <- paste0(figures.prem.sum$thm,'<br>n = ',as.character(figures.prem.sum$n))
+fig.count <- figures.prem.sum %>%
+  plot_ly(x = ~zone,
+          y = ~n,
+          type = 'bar', 
+          text = ~lbl,
+          hoverinfo = 'text',
+          hovertext = ~lbl,
+          name = ~thm,
+          color = ~thm) %>%
+  layout(yaxis = list(title = 'Count'), barmode = 'stack')
+fig.count
 ```
 
 # Impressive rocks
