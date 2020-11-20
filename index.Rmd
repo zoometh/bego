@@ -24,7 +24,8 @@ library(plotly)
 GHimgs <- "https://github.com/zoometh/C14/tree/main/docs/imgs/"
 
 df.corresp.sect <- data.frame(LabelSect=c("Me","Fo","Vr","Sm","Cs","Vm","Go","Vb"),
-                              sectors=c("Les Merveilles","Fontananlba","Valaurette",                                                                      "Sainte-Marie","Valmasque","Col du Sabion","Gordolasque","Vei del Bouc"),
+                              sectors=c("Les Merveilles","Fontananlba","Valaurette",                                                                      "Sainte-Marie","Valmasque",
+                                        "Col du Sabion","Gordolasque","Vei del Bouc"),
                               stringsAsFactors = F)
 df.corresp.thm <- data.frame(prem=c("A","C","F","H","N","P","R","T","X"),
                              thm=c("Axes/Tools","Horned fig.","Halberd","Anthropomorph",
@@ -33,6 +34,23 @@ df.corresp.thm <- data.frame(prem=c("A","C","F","H","N","P","R","T","X"),
                              colors=c("green","red","lightgreen","blue","grey",                                                                                  "darkgreen","yellow","orange","darkgrey"),
                              stringsAsFactors = F)
 thm.not.selected <- c("A","N","X")
+impr.rocks <- list(c("4.3.16D"), # HBZZ
+                   c("7.1.8") # CdT
+                   )
+# rocks - - - - - - - - - - - - - - - - - - - - - 
+roches <- read.table("img/ROCHES.csv", sep = ";", header = T, stringsAsFactors = F)
+# merge to get full names of sectors
+roches <- merge(roches,df.corresp.sect,by="LabelSect",all.x = TRUE)
+roches$lbl.r <- paste0(roches$zone,'.',roches$groupe,'.',roches$roche)
+# figures  - - - - - - - - - - - - - - - - - - - - - 
+figures <- read.table("img/FIGURES.csv", sep = ",", header = T, stringsAsFactors = F)
+figures$zone <- as.factor(figures$zone)
+figures$prem <- toupper(figures$prem)
+figures$lbl.r <- paste0(figures$zone,'.',figures$groupe,'.',figures$roche)
+figures <- figures[figures$prem != '',] # rm NA
+figures <- figures[!(figures$prem %in% thm.not.selected),] # rm N
+figures <- merge(figures,df.corresp.thm,by="prem",all.x = TRUE)
+# unique(figures$prem)
 # source("func/functions.R") # load/run ? function
 # f.lflt.chef(getwd()) # create leaflet html map of the CdT
 ```
@@ -42,9 +60,6 @@ thm.not.selected <- c("A","N","X")
 The site is divided into 7 sectors. Main ones are [**Les Merveilles** sector][] and [**Fontanalba** sector][]
 
 ```{r df.Sectors}
-roches <- read.table("img/ROCHES.csv", sep = ";", header = T, stringsAsFactors = F)
-# merge to get full names of sectors
-roches <- merge(roches,df.corresp.sect,by="LabelSect",all.x = TRUE)
 sect.roches.count <- roches %>%
   group_by(sectors) %>%
   summarise(nb.rocks=n())
@@ -61,20 +76,14 @@ The entire site is about 900 ha, with the large majority of engraved rocks in th
 htmltools::includeHTML(paste0(getwd(),"/img/Bego.html"))
 ```
 
-## The engravings
-
 There's about 20,000 figuratives pecked engravings
 
 ```{r lf.figures, fig.width=7, fig.height=5}
 # TODO: color chart by c'colors' field
-figures <- read.table("img/FIGURES.csv", sep = ",", header = T, stringsAsFactors = F)
-figures$zone <- as.factor(figures$zone)
-figures$prem <- toupper(figures$prem)
-figures.prem.sum <- figures %>% count(prem, zone)
-figures.prem.sum <- figures.prem.sum[figures.prem.sum$prem != '',] # rm NA
-figures.prem.sum <- figures.prem.sum[!(figures.prem.sum$prem %in% thm.not.selected),] # rm N
+figures.prem.sum <- figures %>% count(thm, zone)
+# figures.prem.sum <- figures.prem.sum[figures.prem.sum$prem != '',] # rm NA
+# figures.prem.sum <- figures.prem.sum[!(figures.prem.sum$prem %in% thm.not.selected),] # rm N
 # merge to get thm fullname and colors
-figures.prem.sum <- merge(figures.prem.sum,df.corresp.thm,by="prem",all.x=T)
 figures.prem.sum$lbl <- paste0(figures.prem.sum$thm,'<br>n = ',as.character(figures.prem.sum$n))
 fig.count <- figures.prem.sum %>%
   plot_ly(x = ~zone,
@@ -91,14 +100,77 @@ fig.count
 
 The Zone 13 (**Valaurette** sector) shows a distinctive profile with almost only topographic figure
 
-## Altitudes
+### Spatial distribution
 
-<!-- roches$lbl.r <- paste0(roches$zone,'.',roches$groupe,'.',roches$roche) -->
-<!-- figures$lbl.r <- paste0(figures$zone,'.',figures$groupe,'.',figures$roche) -->
+#### Altitudes
+
+Engravings are displayed on rocks between ~1990 m to ~2700
+
+```{r altis.rocks, echo=F, fig.width=7, fig.height=20}
+# altis
+# roches.altis <- subset(roches, select=c(sectors,lbl.r,Z))
+# roches.altis <- roches.altis[!is.na(roches.altis$Z),]
+# roches.altis <- roches.altis[roches.altis$Z != 0,]
+# min(roches.altis$Z)
+# plot_ly(data = roches.altis,
+#         x = ~sectors,
+#         y = ~Z,
+#         color = ~sectors,
+#         type = 'scatter',
+#         alpha = .5,
+#         mode = "markers"
+# )
+impr.rocks <- roches[roches$lbl.r %in% unlist(impr.rocks),]
+impr.rocks.altis <- subset(impr.rocks, select=c(sectors,nom,lbl.r,Z))
+impr.rocks.altis$lbl <- paste0("<i>",impr.rocks.altis$nom,"</i><br>",impr.rocks.altis$lbl.r)
+# hyperlink
+impr.rocks.altis$text <- paste0("<a href='",getwd(),"/#","4-3-16D","'>A</a>")
+impr.rocks.altis$text <- "<a href='https://google.com'>A</a>"
+
+roches.altis <- subset(roches, select=c(sectors,lbl.r,Z))
+roches.altis <- roches.altis[!is.na(roches.altis$Z),]
+roches.altis <- roches.altis[roches.altis$Z != 0,]
+# roches.altis <- sample_n(roches.altis,100)
+# min(roches.altis$Z)
+plot_ly(data = roches.altis,
+        x = ~sectors,
+        y = ~Z,
+        color = ~sectors,
+        type = 'scatter',
+        alpha = .5,
+        mode = "markers",
+        text = ~lbl.r,
+        hoverinfo = 'text',
+        hovertext = ~lbl.r,
+        name = ~sectors) %>% 
+  add_trace(x=impr.rocks.altis$sectors,
+            y=impr.rocks.altis$Z,
+            type = 'scatter',
+            mode = "markers",
+            # color = "#000000",
+            inherit = F,
+            showlegend = F) %>%
+  # impressive
+  add_annotations(x=impr.rocks.altis$sectors, y=impr.rocks.altis$Z,
+                  text=impr.rocks.altis$lbl,
+                  showarrow=T,
+                  arrowhead=.5) %>%
+  # .. + hyperlink
+  add_trace(
+    mode = 'text',
+    textfont = list(
+      color = 'transparent'
+    ),
+    showlegend = F,
+    inherit = T
+  )
+```
 
 # Impressive rocks
 
-## *Roche de l'Homme aux bras en zigzag* (Zone IV, Groupe III, Roche 16D)
+## 4-3-16D
+
+*Roche de l'Homme aux bras en zigzag* (Zone IV, Groupe III, Roche 16D)
 
 In the Arpette sector lies the *Roche de l'Homme aux bras en zigzag* 
 
@@ -132,6 +204,29 @@ This is really important..
 
 This is really important..
 
+## Engravings
+
+### Altitudes
+
+```{r altis.engr, echo=F, fig.width=7, fig.height=20}
+# altis
+figures.altis <- subset(figures, select=c(lbl.r,figure,thm))
+roches.altis <- subset(roches, select=c(sectors,lbl.r,Z))
+figures.altis <- merge(figures.altis,roches.altis, by="lbl.r", all.x=TRUE)
+figures.altis <- figures.altis[figures.altis$sectors == "Les Merveilles", ]
+figures.altis <- figures.altis[!is.na(figures.altis$Z),]
+figures.altis$thm <- factor(figures.altis$thm, levels = unique(figures.altis$thm))
+# figures.altis <- sample_n(figures.altis,250)
+plot_ly(data = figures.altis,
+        x = ~thm,
+        y = ~Z,
+        color = ~thm,
+        type = 'scatter',
+        alpha = .5,
+        mode = "markers"
+)
+```
+
 ## New paragraph
 
-Near..
+To be continued...
