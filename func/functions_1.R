@@ -12,9 +12,9 @@ library(plotly)
 
 
 wgs84 <- CRS("+proj=longlat +datum=WGS84")
-tab.latin <- data.frame(arabe=c(1:12),
-                        latin=c("I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"),
-                        stringsAsFactors = F)
+# tab.latin <- data.frame(arabe=c(1:12),
+#                         latin=c("I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"),
+#                         stringsAsFactors = F)
 
 conn.pg <- function(){
   drv <- dbDriver("PostgreSQL")
@@ -54,7 +54,7 @@ figures.count <- function(chm){
 f.lflt.aRoche <- function(chm,Z,G,R){
   # create leaflet obj for the chef de tribu and sect Me
   # add the image
-  # Z <- 4 ; G <- 3 ; R <- "16D"
+  # Z <- 4 ; G <- 3 ; R <- "16D" ; R <- "1@a"
   con <- conn.pg()
   sqll <- "select zone,groupe,roche,nom,histoseule,geographie ,ST_X(ST_Transform(wkb_geometry, 4326)) as x ,ST_Y(ST_Transform(wkb_geometry, 4326)) as y from roches_gravees"
   roches.all <- dbGetQuery(con,sqll)
@@ -72,6 +72,8 @@ f.lflt.aRoche <- function(chm,Z,G,R){
                      color = "red",
                      radius = 2,
                      opacity = 0.7)
+  R <- gsub("@","x",R)
+  aRocheName <- paste0("Z",Z,"G",G,"R",R)
   saveWidget(aRoche, file=paste0(chm,"/img/",aRocheName,".html"))
 }
 
