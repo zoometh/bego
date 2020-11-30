@@ -54,24 +54,13 @@ figures.count <- function(chm){
 f.lflt.aRoche <- function(chm,Z,G,R){
   # create leaflet obj for the chef de tribu and sect Me
   # add the image
+  # Z <- 4 ; G <- 3 ; R <- "16D"
   con <- conn.pg()
   sqll <- "select zone,groupe,roche,nom,histoseule,geographie ,ST_X(ST_Transform(wkb_geometry, 4326)) as x ,ST_Y(ST_Transform(wkb_geometry, 4326)) as y from roches_gravees"
   roches.all <- dbGetQuery(con,sqll)
   aRoche <- roches.all[roches.all$zone == Z & roches.all$groupe == G & roches.all$roche == R,]
-  # transcript
-  # Z <- 7 ; G <- 1 ; R <- 8
-  aZ <- tab.latin[tab.latin$arabe == Z,"latin"]
-  aG <- tab.latin[tab.latin$arabe == G,"latin"]
-  aR <- as.character(R)
-  aRocheName <- paste0("Z",aZ,"G",aG,"R",aR)
-  aPath <- paste0("Bego/Images/Images Faces/Z",aZ,"/Z",aZ,"G",aG,"/Z",aZ,"G",aG,"R",aR,".gif")
-  aImg <- drop_media(aPath)
-  # stele.chef.lk <- drop_media("Bego/Images/Images Faces/ZVII/ZVIIGI/ZVIIGIR8.gif")
-  Plan_lk <- paste0('<img src="',
-                    # stele.chef.lk,
-                    aImg,
-                    '" style="width: 55vw; max-width: 200px;" >')
   dbDisconnect(con)
+  Plan_lk <- f.ico.aRoche(Z,G,R)[[2]] # the Plan_lk
   aRoche  <- leaflet(width = "50%") %>%
     setView(lng = aRoche$x, lat = aRoche$y, zoom=18) %>%
     addTiles() %>%  # Add default OpenStreetMap map tiles
@@ -88,6 +77,7 @@ f.lflt.aRoche <- function(chm,Z,G,R){
 
 f.lflt.Bego <- function(chm){
   # create leaflet obj for the Bego zones
+  # chm <- "C:/Users/supernova/Dropbox/My PC (supernova-pc)/Documents/bego"
   con <- conn.pg()
   sqll <- "select zone,groupe,roche,nom,histoseule,geographie ,ST_X(ST_Transform(wkb_geometry, 4326)) as x ,ST_Y(ST_Transform(wkb_geometry, 4326)) as y from roches_gravees"
   roches.all <- dbGetQuery(con,sqll)
@@ -122,6 +112,50 @@ f.lflt.Bego <- function(chm){
                      opacity = 0.3)
   saveWidget(Bego, file=paste0(chm,"/img/Bego.html"))
 }
+
+f.lflt.Z <- function(chm, Z){
+  # create leaflet obj for the Bego zones
+  # chm <- "C:/Users/supernova/Dropbox/My PC (supernova-pc)/Documents/bego"
+  # Z <- 12
+  con <- conn.pg()
+  sqll <- "select zone,groupe,roche,nom,histoseule,geographie ,ST_X(ST_Transform(wkb_geometry, 4326)) as x ,ST_Y(ST_Transform(wkb_geometry, 4326)) as y from roches_gravees"
+  sqll <- paste0(sqll, " where zone =", Z)
+  roches.Z <- dbGetQuery(con,sqll)
+  # label
+  roches.Z$lbl <- paste0(roches.Z$zone,".",
+                         roches.Z$groupe,".",
+                         roches.Z$roche,".")
+  # load zones
+  zones <- pgGetGeom(con,
+                     c("public", "zones"),
+                     geom = "geom",
+                     gid = "gid",
+                     other.cols = c("zone","secteur"),
+                     clauses  = paste0("WHERE zone = ",Z," AND indice = 2"))
+  zones <- reproj(zones) # reproj
+  dbDisconnect(con)
+  Zone <- leaflet(width = "50%") %>%
+    addTiles() %>%  # Add default OpenStreetMap map tiles
+    # secteurs
+    # setView(zoom=1, mat(me)) %>% 
+    addPolygons(data = zones,
+                popup= ~paste0("zone ",as.character(zone)),
+                stroke = TRUE,
+                color = "#000000",
+                weight = 2,
+                fillOpacity = 0,
+                smoothFactor = 0.5) %>% 
+    # all rocks
+    addCircleMarkers(lng=roches.all$x,
+                     lat=roches.all$y,
+                     popup=roches.all$lbl,
+                     radius = 0.5,
+                     opacity = 0.3)
+  saveWidget(Zone, file=paste0(chm,"/img/Z",Z,".html"))
+}
+
+# select zone from zones where indice = 2 -- groupe = 666 and zone <> 666
+# order by zone
 
 
 f.bego.plan <- function(roches.xy){

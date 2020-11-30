@@ -1,7 +1,7 @@
 ---
 title: "Bego"
 author: "Thomas Huet"
-date: "11/12/2020"
+# date: "11/12/2020"
 header-includes:
   # - \usepackage{float}
   # - \floatplacement{figure}{H}  #make every figure with capti
@@ -20,11 +20,15 @@ library(RPostgreSQL)
 library(rdrop2)
 library(rgl)
 library(plotly)
+library(rpostgis)
+
 
 GHimgs <- "https://github.com/zoometh/C14/tree/main/docs/imgs/"
 
-df.corresp.sect <- data.frame(LabelSect=c("Me","Fo","Vr","Sm","Cs","Vm","Go","Vb"),
-                              sectors=c("Les Merveilles","Fontananlba","Valaurette",                                                                      "Sainte-Marie","Valmasque",
+df.corresp.sect <- data.frame(LabelSect=c("Me","Fo","Vr",
+                                          "Sm","Vm",
+                                          "Cs","Go","Vb"),
+                              sectors=c("Les Merveilles","Fontanalba","Valaurette",                                                                      "Sainte-Marie","Valmasque",
                                         "Col du Sabion","Gordolasque","Vei del Bouc"),
                               stringsAsFactors = F)
 df.corresp.thm <- data.frame(prem=c("A","C","F","H","N","P","R","T","X"),
@@ -35,7 +39,9 @@ df.corresp.thm <- data.frame(prem=c("A","C","F","H","N","P","R","T","X"),
                              stringsAsFactors = F)
 thm.not.selected <- c("A","N","X")
 impr.rocks <- list(c("4.3.16D"), # HBZZ
-                   c("7.1.8") # CdT
+                   c("7.1.8"), # CdT
+                   c("11.0.1"), # Roche de l'Autel
+                   c("12.5.1@a") # Gande déesse
                    )
 # rocks - - - - - - - - - - - - - - - - - - - - - 
 roches <- read.table("img/ROCHES.csv", sep = ";", header = T, stringsAsFactors = F)
@@ -53,18 +59,49 @@ figures <- merge(figures,df.corresp.thm,by="prem",all.x = TRUE)
 # unique(figures$prem)
 # source("func/functions.R") # load/run ? function
 # f.lflt.chef(getwd()) # create leaflet html map of the CdT
+
+f.ico.aRoche <- function(Z,G,R){
+  con <- conn.pg()
+  # sqll <- "select zone,groupe,roche,nom,histoseule,geographie ,ST_X(ST_Transform(wkb_geometry, 4326)) as x ,ST_Y(ST_Transform(wkb_geometry, 4326)) as y from roches_gravees"
+  # roches.all <- dbGetQuery(con,sqll)
+  # aRoche <- roches.all[roches.all$zone == Z & roches.all$groupe == G & roches.all$roche == R,]
+  # transcript
+  aZ <- tab.latin[tab.latin$arabe == Z,"latin"]
+  aG <- tab.latin[tab.latin$arabe == G,"latin"]
+  aR <- as.character(R)
+  aRocheName <- paste0("Z",aZ,"G",aG,"R",aR)
+  aPath <- paste0("Bego/Images/Images Faces/Z",aZ,"/Z",aZ,"G",aG,"/Z",aZ,"G",aG,"R",aR,".gif")
+  aImg <- drop_media(aPath)
+  # stele.chef.lk <- drop_media("Bego/Images/Images Faces/ZVII/ZVIIGI/ZVIIGIR8.gif")
+  Plan_lk <- paste0('<img src="',
+                    # stele.chef.lk,
+                    aImg$link,
+                    '" style="width: 55vw; max-width: 200px;" >')
+  dbDisconnect(con)
+  return(list(aImg$link,Plan_lk))
+}
 ```
 
-# The site
+The mount Bego region is almost known for its rock-[art](#ra) but it is also one of the earliest [occupation](#occup) of early Neolithic
 
-The site is divided into 7 sectors. Main ones are [**Les Merveilles** sector][] and [**Fontanalba** sector][]
+# The rock-art {#ra}
+
+The site is divided into 7 sectors. Main ones are [**Les Merveilles** sector](#Me) and [**Fontanalba** sector](#Fo) 
 
 ```{r df.Sectors}
 sect.roches.count <- roches %>%
   group_by(sectors) %>%
   summarise(nb.rocks=n())
+sect.roches.count <- merge(sect.roches.count, df.corresp.sect, by="sectors")
+sect.roches.count$url <- paste0("#",sect.roches.count$LabelSect) # add url
+sect.roches.count$sectors <- paste0("[",sect.roches.count$sectors,"](",sect.roches.count$url,")")
+
 # order
 sect.roches.count <- sect.roches.count[with(sect.roches.count, order(-nb.rocks)), ]
+# total
+total <- c("TOTAL", sum(sect.roches.count$nb.rocks))
+sect.roches.count <- rbind(sect.roches.count, total)
+sect.roches.count$LabelSect <- sect.roches.count$url <- NULL
 kable(sect.roches.count,"html") %>%
   kable_styling(full_width = FALSE, position = "center", font_size=12)
 
@@ -98,7 +135,9 @@ fig.count <- figures.prem.sum %>%
 fig.count
 ```
 
-The Zone 13 (**Valaurette** sector) shows a distinctive profile with almost only topographic figure
+The main common engravings are, from large, [horned figures](#eng.p.thm.horn.horn) engraved.
+
+The Zone 13 ([**Valaurette** sector](#Vr)) shows a distinctive profile with almost only [topographic figure](#eng.p.thm.geom.tp)
 
 ### Spatial distribution
 
@@ -106,7 +145,7 @@ The Zone 13 (**Valaurette** sector) shows a distinctive profile with almost only
 
 Engravings are displayed on rocks between ~1990 m to ~2700
 
-```{r altis.rocks, echo=F, fig.width=7, fig.height=20}
+```{r altis.rocks, echo=F, fig.width=7, fig.height=15}
 # altis
 # roches.altis <- subset(roches, select=c(sectors,lbl.r,Z))
 # roches.altis <- roches.altis[!is.na(roches.altis$Z),]
@@ -124,7 +163,7 @@ impr.rocks <- roches[roches$lbl.r %in% unlist(impr.rocks),]
 impr.rocks.altis <- subset(impr.rocks, select=c(sectors,nom,lbl.r,Z))
 impr.rocks.altis$lbl <- paste0("<i>",impr.rocks.altis$nom,"</i><br>",impr.rocks.altis$lbl.r)
 # hyperlink
-impr.rocks.altis$text <- paste0("<a href='",getwd(),"/#","4-3-16D","'>A</a>")
+impr.rocks.altis$text <- paste0("<a href='",getwd(),"/#","ZIVGIIIR16D","'>A</a>")
 impr.rocks.altis$text <- "<a href='https://google.com'>A</a>"
 
 roches.altis <- subset(roches, select=c(sectors,lbl.r,Z))
@@ -168,9 +207,9 @@ plot_ly(data = roches.altis,
 
 # Impressive rocks
 
-## 4-3-16D
+Impressive rock engravings are often the [anthropomorphs](#eng.p.thm.anth) while their represent only a narrow part of all figurative engravings
 
-*Roche de l'Homme aux bras en zigzag* (Zone IV, Groupe III, Roche 16D)
+## *Roche de l'Homme aux bras en zigzag* ([Zone IV](#ZIV), Groupe III, Roche 16D) {#ZIVGIIIR16D}
 
 In the Arpette sector lies the *Roche de l'Homme aux bras en zigzag* 
 
@@ -181,7 +220,19 @@ In the Arpette sector lies the *Roche de l'Homme aux bras en zigzag*
 htmltools::includeHTML(paste0(getwd(),"/img/ZIVGIIIR16D.html"))
 ```
 
-## *Stèle du Chef de Tribu* (Zone VII, Groupe I, Roche 8)
+The rocks main figure is an [anthropomorph](#eng.p.thm.anth) with arms in zigzag.
+
+```{r ic.HBZZ}
+# Define variable containing url
+# knitr::include_url(f.ico.aRoche(4,3,"16D")[[1]])
+# url <- f.ico.aRoche(4,3,"16D")[[1]]
+# url <- f.ico.aRoche(4,3,"16D")[[1]]
+# # url <- "http://www.online-image-editor.com//styles/2014/images/example_image.png"
+#  ![Hadley Wickham](`r url`).
+```
+
+
+## *Stèle du Chef de Tribu* ([Zone VII](#ZVII), Groupe I, Roche 8){#ZVIIGIR8}
 
 In the vallées de Merveilles lies the unique stelae of the site, the so-called *Stèle du Chef de Tribu*
 
@@ -196,19 +247,89 @@ htmltools::includeHTML(paste0(getwd(),"/img/ZVIIGIR8.html"))
 
 ## Sectors
 
-### **Les Merveilles** sector
+### **Les Merveilles** sector {#Me}
 
 This is really important..
 
-### **Fontanalba** sector
+#### Zones
+
+##### Zone I {#ZI}
+
+This is the lowest important concentration of engravings in the Merveilles sector
+
+```{r lf.Z1}
+# load the lf map from img/CdT.html
+# knitr::include_url("https://yihui.shinyapps.io/miniUI/")
+# knitr::include_app(paste0(getwd(),"/img/m.html"), height = '600px')
+htmltools::includeHTML(paste0(getwd(),"/img/Z1.html"))
+```
+
+The zone is characterised by figures à franges
+
+##### Zone IV {#ZIV}
+
+```{r lf.Z4}
+# load the lf map from img/CdT.html
+# knitr::include_url("https://yihui.shinyapps.io/miniUI/")
+# knitr::include_app(paste0(getwd(),"/img/m.html"), height = '600px')
+htmltools::includeHTML(paste0(getwd(),"/img/Z4.html"))
+```
+
+The most known rocks are the HBZZ
+
+##### Zone VII {#ZVII}
+
+```{r lf.Z7}
+# load the lf map from img/CdT.html
+# knitr::include_url("https://yihui.shinyapps.io/miniUI/")
+# knitr::include_app(paste0(getwd(),"/img/m.html"), height = '600px')
+htmltools::includeHTML(paste0(getwd(),"/img/Z7.html"))
+```
+
+The most known rocks are the CdT and the Christ
+
+##### Zone XII {#ZXII}
+
+
+```{r lf.Z12}
+# load the lf map from img/CdT.html
+# knitr::include_url("https://yihui.shinyapps.io/miniUI/")
+# knitr::include_app(paste0(getwd(),"/img/m.html"), height = '600px')
+htmltools::includeHTML(paste0(getwd(),"/img/Z12.html"))
+```
+
+### **Fontanalba** sector {#Fo}
 
 This is really important..
+
+### **Valaurette** sector {#Vr}
+
+This is really important..
+
+### **Sainte-Marie** sector {#Sm}
+
+### **Valmasque** sector {#Vm}
+
+### **Col du Sabion** sector {#Cs}
+
+### **Gordolasque** sector {#Go}
+
+It is equivalent to the zone XXIII. It has a unique engraved rock discovered by J. Begin.
+
+```{r lf.Z23}
+# load the lf map from img/CdT.html
+# knitr::include_url("https://yihui.shinyapps.io/miniUI/")
+# knitr::include_app(paste0(getwd(),"/img/m.html"), height = '600px')
+htmltools::includeHTML(paste0(getwd(),"/img/Z23.html"))
+```
+
+### **Vei del Bouc** sector {#Vb}
 
 ## Engravings
 
 ### Altitudes
 
-```{r altis.engr, echo=F, fig.width=7, fig.height=20}
+```{r altis.engr, echo=F, fig.width=7, fig.height=15}
 # altis
 figures.altis <- subset(figures, select=c(lbl.r,figure,thm))
 roches.altis <- subset(roches, select=c(sectors,lbl.r,Z))
@@ -227,6 +348,28 @@ plot_ly(data = figures.altis,
 )
 ```
 
-## New paragraph
+# The engravings {#eng}
 
-To be continued...
+There is two main techniques with only a narrow regsitry shared
+
+## Pecked engravings {#eng.p}
+
+### Themes {#eng.p.thm}
+
+#### Horned figures and yokes {#eng.p.thm.horn}
+
+##### Horned figures {#eng.p.thm.horn.horn}
+
+#### Anthropomorph {#eng.p.thm.anth}
+
+##### Figures à franges {#eng.p.thm.anth.ff}
+
+#### Geometric
+
+##### Topographic figures {#eng.p.thm.geom.tp}
+
+# The early occupations {#occup}
+
+## Gias del Ciari {#occup.gias.ciari}
+
+
