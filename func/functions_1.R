@@ -11,12 +11,12 @@ library(sp)
 library(plotly)
 
 
-wgs84 <- CRS("+proj=longlat +datum=WGS84")
 # tab.latin <- data.frame(arabe=c(1:12),
 #                         latin=c("I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"),
 #                         stringsAsFactors = F)
 
-conn.pg <- function(){
+# TODO: use functions from Rdev package
+rdev.conn.pg <- function(){
   drv <- dbDriver("PostgreSQL")
   con <- dbConnect(drv,
                    dbname="bego",
@@ -26,8 +26,10 @@ conn.pg <- function(){
                    password="postgres")
 }
 
-reproj <- function(a.geom){
-  # reproject
+# TODO: use functions from Rdev package
+rdev.reproj <- function(a.geom){
+  # rdev.reproject
+  wgs84 <- CRS("+proj=longlat +datum=WGS84")
   a.geom <- spTransform(a.geom, wgs84)
   return(a.geom)
 }
@@ -55,7 +57,7 @@ f.lflt.aRoche <- function(chm,Z,G,R){
   # create leaflet obj for the chef de tribu and sect Me
   # add the image
   # Z <- 4 ; G <- 3 ; R <- "16D" ; R <- "1@a"
-  con <- conn.pg()
+  con <- rdev.conn.pg()
   sqll <- "select zone,groupe,roche,nom,histoseule,geographie ,ST_X(ST_Transform(wkb_geometry, 4326)) as x ,ST_Y(ST_Transform(wkb_geometry, 4326)) as y from roches_gravees"
   roches.all <- dbGetQuery(con,sqll)
   aRoche <- roches.all[roches.all$zone == Z & roches.all$groupe == G & roches.all$roche == R,]
@@ -80,7 +82,7 @@ f.lflt.aRoche <- function(chm,Z,G,R){
 f.lflt.Bego <- function(chm){
   # create leaflet obj for the Bego zones
   # chm <- "C:/Users/supernova/Dropbox/My PC (supernova-pc)/Documents/bego"
-  con <- conn.pg()
+  con <- rdev.conn.pg()
   sqll <- "select zone,groupe,roche,nom,histoseule,geographie ,ST_X(ST_Transform(wkb_geometry, 4326)) as x ,ST_Y(ST_Transform(wkb_geometry, 4326)) as y from roches_gravees"
   roches.all <- dbGetQuery(con,sqll)
   # label
@@ -94,7 +96,7 @@ f.lflt.Bego <- function(chm){
                      gid = "gid",
                      other.cols = c("secteur"),
                      clauses  = "WHERE secteur not like ''")
-  zones <- reproj(zones) # reproj
+  zones <- rdev.reproj(zones) # rdev.reproj
   dbDisconnect(con)
   Bego <- leaflet(width = "50%") %>%
     addTiles() %>%  # Add default OpenStreetMap map tiles
@@ -119,7 +121,7 @@ f.lflt.Z <- function(chm, Z){
   # create leaflet obj for the Bego zones
   # chm <- "C:/Users/supernova/Dropbox/My PC (supernova-pc)/Documents/bego"
   # Z <- 12
-  con <- conn.pg()
+  con <- rdev.conn.pg()
   sqll <- "select zone,groupe,roche,nom,histoseule,geographie ,ST_X(ST_Transform(wkb_geometry, 4326)) as x ,ST_Y(ST_Transform(wkb_geometry, 4326)) as y from roches_gravees"
   sqll <- paste0(sqll, " where zone =", Z)
   roches.Z <- dbGetQuery(con,sqll)
@@ -134,7 +136,7 @@ f.lflt.Z <- function(chm, Z){
                      gid = "gid",
                      other.cols = c("zone","secteur"),
                      clauses  = paste0("WHERE zone = ",Z," AND indice = 2"))
-  zones <- reproj(zones) # reproj
+  zones <- rdev.reproj(zones) # rdev.reproj
   dbDisconnect(con)
   Zone <- leaflet(width = "50%") %>%
     addTiles() %>%  # Add default OpenStreetMap map tiles

@@ -433,3 +433,9 @@ htmltools::includeHTML(paste0(getwd(),"/img/Z23.html"))
 # The early occupations {#occup}
 
 ## Gias del Ciari {#occup.gias.ciari}
+
+# References
+
+[My PhD (2012)](https://tel.archives-ouvertes.fr/tel-00712290), published in the [*Mémoires de la Société Préhistorique Française (n° 63)* (2017)](http://www.prehistoire.org/shop_515-40342-0-0/m63-2017-les-gravures-piquetees-du-mont-bego-alpes-maritimes-organisation-spatiale-et-seriation-vie-iie-millenaire-av.-j.-c.-t.-huet.html), was dedicated to the mont Bego rock-art (Alpes-Maritimes, France), 
+
+![](http://www.prehistoire.org/offres/file_inline_src/515/515_imgO_020317_092024.jpg){width=250px}]
