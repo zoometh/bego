@@ -8,6 +8,43 @@ from typing import Any, List, Dict
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
+import pandas as pd
+
+from pathlib import Path
+from urllib.parse import quote
+
+
+def path_to_md_link(path_str):
+    if not path_str:
+        return ""
+
+    # Convert Windows path → POSIX
+    p = Path(path_str)
+    posix_path = p.as_posix()
+
+    # Encode spaces and special chars
+    encoded_path = quote(posix_path)
+
+    # Use filename as link text
+    name = p.name
+    
+    # print(p, name, encoded_path)
+
+    return f"[{name}]({p})"
+
+def update_paths(rows):
+    for row in rows:
+        for key in ["plan", "image"]:
+            if row.get(key):
+                row[key] = row[key].replace(
+                    "D:\\",
+                    "D:\\(ARCHIVES)\\Bego\\"
+                )
+                row[key] = row[key].replace(
+                    " ",
+                    "_"
+                )
+    return rows
 
 def get_roches_with_total_ff(
     config_path: str = r"C:/Users/TH282424/Rprojects/bego/doc/conf/db_config.json"
@@ -70,8 +107,30 @@ def get_roches_with_total_ff(
             conn.close()
             
 results = get_roches_with_total_ff()
+print(results)
+results = update_paths(results)
 
-for row in results:
-    print(row["idroche"], row["alphalabel"], row["total_ff"])
+# for row in results:
+#     print(row["idroche"], row["alphalabel"], row["total_ff"], row["plan"], row["image"])
 
-#%%
+
+# df = pd.DataFrame(results)
+# print(df.to_markdown(index=False))
+
+headers = ["idroche", "alphalabel", "total_ff", "plan", "image"]
+
+with open("ff_list.md", "w", encoding="utf-8") as f:
+    f.write("| " + " | ".join(headers) + " |\n")
+    f.write("| " + " | ".join(["---"] * len(headers)) + " |\n")
+
+    for row in results:
+        values = [
+            str(row["idroche"]),
+            str(row["alphalabel"]),
+            str(row["total_ff"]),
+            path_to_md_link(row["plan"]),
+            path_to_md_link(row["image"]),
+        ]
+        f.write("| " + " | ".join(values) + " |\n")
+
+# %%
