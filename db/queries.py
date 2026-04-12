@@ -38,7 +38,7 @@ def update_paths(rows):
             if row.get(key):
                 row[key] = row[key].replace(
                     "D:\\",
-                    "D:\\(ARCHIVES)\\Bego\\"
+                    "D:\\Bego\\"
                 )
                 row[key] = row[key].replace(
                     " ",
