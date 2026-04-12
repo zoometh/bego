@@ -1,0 +1,648 @@
+---
+title: "Bego"
+author: "Thomas Huet"
+date: "`r format(Sys.Date())`"
+# header-includes:
+  # - \usepackage{float}
+  # - \floatplacement{figure}{H}  #make every figure with capti
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, fig.width = 10, fig.height = 10)
+# opts_chunk$set(fig.width=12, fig.height=8)
+library(kableExtra)
+library(dplyr)
+library(knitr)
+library(magick)
+library(leaflet)
+library(RPostgreSQL)
+library(rdrop2)
+library(rgl)
+library(plotly)
+library(rpostgis)
+library(sp)
+
+
+GHimgs <- "https://github.com/zoometh/C14/tree/main/docs/imgs/"
+
+df.corresp.sect <- data.frame(LabelSect=c("Me","Fo","Vr",
+                                          "Sm","Vm",
+                                          "Cs","Go","Vb"),
+                              sectors=c("Les Merveilles","Fontanalba","Valaurette",                                                                      "Sainte-Marie","Valmasque",
+                                        "Col du Sabion","Gordolasque","Vei del Bouc"),
+                              stringsAsFactors = F)
+df.corresp.thm <- data.frame(prem=c("A","C","F","H","N","P","R","T","X"),
+                             thm=c("Axes/Tools","Horned fig.","Halberd","Anthropomorph",
+                                   "Unfigurative","Dagger","Reticulated/Topographic","Yoke",
+                                   "Special fig."),
+                             colors=c("green","red","lightgreen","blue","grey",                                                                                  "darkgreen","yellow","orange","darkgrey"),
+                             stringsAsFactors = F)
+tab.latin <- data.frame(arabe=c(0:12),
+                        latin=c("0","I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"),
+                        stringsAsFactors = F)
+thm.not.selected <- c("A","N","X")
+impr.rocks <- list(c("4.3.16D"), # HBZZ
+                   c("7.1.8"), # CdT
+                   c("11.0.1"), # Roche de l'Autel
+                   c("12.5.1@a") # Gande déesse
+)
+# rocks - - - - - - - - - - - - - - - - - - - - - 
+roches <- read.table("img/ROCHES.csv", sep = ";", header = T, stringsAsFactors = F)
+# merge to get full names of sectors
+roches <- merge(roches,df.corresp.sect,by="LabelSect",all.x = TRUE)
+roches$lbl.r <- paste0(roches$zone,'.',roches$groupe,'.',roches$roche)
+# figures  - - - - - - - - - - - - - - - - - - - - - 
+figures <- read.table("img/FIGURES.csv", sep = ",", header = T, stringsAsFactors = F)
+figures$zone <- as.factor(figures$zone)
+figures$prem <- toupper(figures$prem)
+figures$lbl.r <- paste0(figures$zone,'.',figures$groupe,'.',figures$roche)
+figures <- figures[figures$prem != '',] # rm NA
+figures <- figures[!(figures$prem %in% thm.not.selected),] # rm N
+figures <- merge(figures,df.corresp.thm,by="prem",all.x = TRUE)
+# unique(figures$prem)
+# source("func/functions.R") # load/run ? function
+# f.lflt.chef(getwd()) # create leaflet html map of the CdT
+
+rdev.conn.pg <- function(){
+  drv <- dbDriver("PostgreSQL")
+  con <- dbConnect(drv,
+                   dbname="bego",
+                   host="localhost",
+                   port=5432,
+                   user="postgres",
+                   password="postgres")
+}
+
+f.ico.aRoche <- function(Z,G,R){
+  # return the name of the rock url link
+  con <- rdev.conn.pg()
+  # sqll <- "select zone,groupe,roche,nom,histoseule,geographie ,ST_X(ST_Transform(wkb_geometry, 4326)) as x ,ST_Y(ST_Transform(wkb_geometry, 4326)) as y from roches_gravees"
+  # roches.all <- dbGetQuery(con,sqll)
+  # aRoche <- roches.all[roches.all$zone == Z & roches.all$groupe == G & roches.all$roche == R,]
+  # transcript
+  aZ <- tab.latin[tab.latin$arabe == Z,"latin"]
+  aG <- tab.latin[tab.latin$arabe == G,"latin"]
+  aR <- as.character(R)
+  # aRocheName <- paste0("Z",aZ,"G",aG,"R",aR)
+  aPath <- paste0("Bego/Images/Images Faces/Z",aZ,"/Z",aZ,"G",aG,"/Z",aZ,"G",aG,"R",aR,".gif")
+  # print(paste0("   - read link Dropbox: ",aPath))
+  aImg <- drop_media(aPath)
+  # stele.chef.lk <- drop_media("Bego/Images/Images Faces/ZVII/ZVIIGI/ZVIIGIR8.gif")
+  Plan_lk <- paste0('<img src="',
+                    # stele.chef.lk,
+                    aImg$link,
+                    '" style="width: 55vw; max-width: 200px;" >')
+  dbDisconnect(con)
+  return(list(aImg$link,Plan_lk))
+}
+
+# TODO: use functions from Rdev package
+rdev.conn.pg <- function(){
+  drv <- dbDriver("PostgreSQL")
+  con <- dbConnect(drv,
+                   dbname="bego",
+                   host="localhost",
+                   port=5432,
+                   user="postgres",
+                   password="postgres")
+}
+
+# TODO: use functions from Rdev package
+rdev.reproj <- function(a.geom){
+  # rdev.reproject
+  wgs84 <- CRS("+proj=longlat +datum=WGS84")
+  a.geom <- spTransform(a.geom, wgs84)
+  return(a.geom)
+}
+
+figures.count <- function(chm){
+  # ceate plotly count on 'prem'
+  figures <- read.table("img/FIGURES.csv",sep = ",",header = T)
+  figures$zone <- as.factor(figures$zone)
+  figures$prem <- toupper(figures$prem)
+  # figures.prem.sum <- figures.prem.sum[!is.na(figures.prem.sum$prem),] # rm NA
+  figures.prem.sum <- figures %>% count(prem, zone)
+  figures.prem.sum <- figures.prem.sum[figures.prem.sum$prem != '',] # rm NA
+  figures.prem.sum <- figures.prem.sum[figures.prem.sum$prem != 'N',] # rm N
+  # table(zone = figures.prem.sum$zone, figures.prem.sum$prem)
+  
+  fig.count <- figures.prem.sum %>%
+    plot_ly(x = ~zone, y = ~n, type = 'bar', 
+            name = ~prem, color = ~prem) %>%
+    layout(yaxis = list(title = 'Count'), barmode = 'stack')
+  htmlwidgets::saveWidget(as_widget(fig.count),paste0(chm,"/img/figures_count_by_zones.html"))
+}
+
+
+f.lflt.aRoche <- function(Z,G,R){
+  # create leaflet obj for the chef de tribu and sect Me
+  # add the image
+  # Z <- 7 ; G <- 1 ; R <- "8" ; R <- "1@a"
+  con <- rdev.conn.pg()
+  sqll <- "select zone,groupe,roche,nom,histoseule,geographie ,ST_X(ST_Transform(wkb_geometry, 4326)) as x ,ST_Y(ST_Transform(wkb_geometry, 4326)) as y from roches_gravees"
+  roches.all <- dbGetQuery(con,sqll)
+  roches.all$lbl <- paste0(roches.all$zone,".",
+                           roches.all$groupe,".",
+                           roches.all$roche,".")
+  aRoche <- roches.all[roches.all$zone == Z & roches.all$groupe == G & roches.all$roche == R,]
+  dbDisconnect(con)
+  Plan_lk <- f.ico.aRoche(Z,G,R)[[2]] # the Plan_lk
+  aRoche  <- leaflet(width = "50%", height = "600px") %>%
+    setView(lng = aRoche$x, lat = aRoche$y, zoom=18) %>%
+    addTiles(group = 'OSM') %>%  # Add default OpenStreetMap map tiles
+    addProviderTiles("Esri.WorldImagery", group = "Ortho") %>%
+    addCircleMarkers(lng=roches.all$x, lat=roches.all$y,
+                     popup="engraved<br>rock",radius = 1,opacity = 0.3) %>%
+    addCircleMarkers(lng=aRoche$x, lat=aRoche$y,
+                     popup = Plan_lk,
+                     color = "red",
+                     radius = 2,
+                     opacity = 0.7) %>%
+    addLayersControl(
+      baseGroups = c('Ortho', 'OSM')) %>%
+    addScaleBar(position = "bottomleft")
+  R <- gsub("@","x",R)
+  aRocheName <- paste0("Z",Z,"G",G,"R",R)
+  return(aRoche)
+  # saveWidget(aRoche, file=paste0(chm,"/img/",aRocheName,".html"))
+}
+f.lflt.aRoche(7,1,"8")
+
+f.lflt.Bego <- function(){
+  # create leaflet obj for the Bego zones
+  # chm <- "C:/Users/supernova/Dropbox/My PC (supernova-pc)/Documents/bego"
+  con <- rdev.conn.pg()
+  sqll <- "select zone,groupe,roche,nom,histoseule,geographie ,ST_X(ST_Transform(wkb_geometry, 4326)) as x ,ST_Y(ST_Transform(wkb_geometry, 4326)) as y from roches_gravees"
+  roches.all <- dbGetQuery(con,sqll)
+  # label
+  roches.all$lbl <- paste0(roches.all$zone,".",
+                           roches.all$groupe,".",
+                           roches.all$roche,".")
+  # load zones
+  zones <- pgGetGeom(con,
+                     c("public", "zones"),
+                     geom = "geom",
+                     gid = "gid",
+                     other.cols = c("secteur"),
+                     clauses  = "WHERE secteur not like ''",)
+  zones <- rdev.reproj(zones) # rdev.reproj
+  dbDisconnect(con)
+  Bego <- leaflet(width = "50%", height = "600px") %>%
+    addTiles(group = 'OSM') %>%  # Add default OpenStreetMap map tiles
+    addProviderTiles("Esri.WorldImagery", group = "Ortho") %>%
+    # secteurs
+    addPolygons(data = zones,
+                popup= ~secteur,
+                stroke = TRUE,
+                color = "#000000",
+                weight = 2,
+                fillOpacity = 0,
+                smoothFactor = 0.5) %>% 
+    # all rocks
+    addCircleMarkers(lng=roches.all$x,
+                     lat=roches.all$y,
+                     popup=roches.all$lbl,
+                     radius = 0.5,
+                     opacity = 0.3) %>%
+    addLayersControl(
+      baseGroups = c('Ortho', 'OSM')) %>%
+    addScaleBar(position = "bottomleft")
+  return(Bego)
+  # saveWidget(Bego, file=paste0(chm,"/img/Bego.html"))
+}
+
+f.lflt.Z <- function(Z){
+  # create leaflet obj for the Bego zones
+  # chm <- "C:/Users/supernova/Dropbox/My PC (supernova-pc)/Documents/bego"
+  # Z <- 1
+  con <- rdev.conn.pg()
+  sqll <- "select zone,groupe,roche,nom,histoseule,geographie ,ST_X(ST_Transform(wkb_geometry, 4326)) as x ,ST_Y(ST_Transform(wkb_geometry, 4326)) as y from roches_gravees"
+  sqll <- paste0(sqll, " where zone =", Z)
+  roches.Z <- dbGetQuery(con,sqll)
+  # label
+  roches.Z$lbl <- paste0(roches.Z$zone,".",
+                         roches.Z$groupe,".",
+                         roches.Z$roche,".")
+  # load zones
+  zones <- pgGetGeom(con,
+                     c("public", "zones"),
+                     geom = "geom",
+                     gid = "gid",
+                     other.cols = c("zone","secteur"),
+                     clauses  = paste0("WHERE zone = ",Z," AND indice = 2"))
+  zones <- rdev.reproj(zones) # rdev.reproj
+  dbDisconnect(con)
+  Zone <- leaflet(width = "50%", height = "600px") %>%
+    addTiles(group = 'OSM') %>%  # Add default OpenStreetMap map tiles
+    addProviderTiles("Esri.WorldImagery", group = "Ortho") %>%
+    addPolygons(data = zones,
+                popup= ~paste0("zone ",as.character(zone)),
+                stroke = TRUE,
+                color = "#000000",
+                weight = 2,
+                fillOpacity = 0,
+                smoothFactor = 0.5) %>% 
+    # all rocks
+    addCircleMarkers(lng=roches.Z$x,
+                     lat=roches.Z$y,
+                     popup=roches.Z$lbl,
+                     radius = 0.5,
+                     opacity = 0.3) %>%
+    addLayersControl(
+      baseGroups = c('Ortho', 'OSM')) %>%
+    addScaleBar(position = "bottomleft")
+  return(Zone)
+  # saveWidget(Zone, file=paste0(chm,"/img/Z",Z,".html"))
+}
+
+# select zone from zones where indice = 2 -- groupe = 666 and zone <> 666
+# order by zone
+
+
+f.bego.plan <- function(roches.xy){
+  # load plan from GDropBox
+  plan.path <- "D:\\\\Base de Donnees"
+  # \\\\Images\\\\Images Faces\\\\
+  roches.xy$Plan <- gsub(plan.path,"Bego",roches.xy[,"Plan"])
+  roches.xy$Plan <- gsub("\\\\","/",roches.xy[,"Plan"])
+  roches.xy$Plan_lk <- NA
+  for (i in 1:nrow(roches.xy)){
+    # i <- 1
+    a.img <- drop_media("Bego/Images/SS_Plan.bmp")
+    try(a.img <- drop_media(roches.xy[i,"Plan"]),
+        silent = T)
+    # a.img <- drop_media('Sauri/R11/IMG_8279.JPG')
+    roches.xy[i,"Plan_lk"] <- path.img <- paste0('<img src="',
+                                                 a.img$link,
+                                                 # 'https://drive.google.com/uc?export=view&id=',
+                                                 # a.rock.fold,
+                                                 # '1DBlLa-PnN2hWcAIoqf5jhb7rIOarIM7y',
+                                                 '" style="width: 55vw; max-width: 200px;" >')
+  }
+  return(roches.xy)
+}
+```
+
+The mount Bego region is almost known for its [rock-art](#ra) with some [impressive engraved rocks](#imprck), but the site is also one of the earliest  [occupation](#occup) of mountains datied to the early Neolithic of (ca. -5300 BC)
+
+# The rock-art site {#ra}
+
+The site is divided into [7 sectors](#SZ). Main ones are [**Les Merveilles** sector](#Me) and [**Fontanalba** sector](#Fo)
+
+```{r df.Sectors}
+sect.roches.count <- roches %>%
+  group_by(sectors) %>%
+  summarise(nb.rocks=n())
+sect.roches.count <- merge(sect.roches.count, df.corresp.sect, by="sectors")
+sect.roches.count$url <- paste0("#",sect.roches.count$LabelSect) # add url
+sect.roches.count$sectors <- paste0("[",sect.roches.count$sectors,"](",sect.roches.count$url,")")
+
+# order
+sect.roches.count <- sect.roches.count[with(sect.roches.count, order(-nb.rocks)), ]
+# total
+total <- c("TOTAL", sum(sect.roches.count$nb.rocks))
+sect.roches.count <- rbind(sect.roches.count, total)
+sect.roches.count$LabelSect <- sect.roches.count$url <- NULL
+kable(sect.roches.count,"html", row.names = F) %>%
+  kable_styling(full_width = FALSE, position = "center", font_size=12)
+
+```
+
+The entire site is about 900 ha, with the large majority of engraved rocks in the France territory ([**Les Merveilles** sector](#Me), [**Fontanalba** sector](#Fo), etc. )but also a sector in between France and Italy ([**Col du Sabion** sector](#Cs)) and a rock in Italy ([**Vei del Bouc** sector](#Vb))  
+
+```{r lf.Sectors, echo=F}
+# htmltools::includeHTML(paste0(getwd(),"/img/Bego.html"))
+Bego.map <- f.lflt.Bego()
+Bego.map
+```
+
+## Rocks altitudes {#ra.alti}
+
+Engravings are displayed on rocks between ~1990 m to ~2700
+
+```{r altis.rocks, echo=F, fig.width=7, fig.height=10, fig.cap="Altitudes of the rocks with the names of the *impressive* ones"}
+# altis
+# roches.altis <- subset(roches, select=c(sectors,lbl.r,Z))
+# roches.altis <- roches.altis[!is.na(roches.altis$Z),]
+# roches.altis <- roches.altis[roches.altis$Z != 0,]
+# min(roches.altis$Z)
+# plot_ly(data = roches.altis,
+#         x = ~sectors,
+#         y = ~Z,
+#         color = ~sectors,
+#         type = 'scatter',
+#         alpha = .5,
+#         mode = "markers"
+# )
+impr.rocks <- roches[roches$lbl.r %in% unlist(impr.rocks),]
+impr.rocks.altis <- subset(impr.rocks, select=c(sectors,nom,lbl.r,Z))
+impr.rocks.altis$lbl <- paste0("<i>",impr.rocks.altis$nom,"</i><br>",impr.rocks.altis$lbl.r)
+# TODO: hyperlink
+impr.rocks.altis$text <- paste0("<a href='",getwd(),"/#","ZIVGIIIR16D","'>A</a>")
+impr.rocks.altis$text <- "<a href='https://google.com'>A</a>"
+
+roches.altis <- subset(roches, select=c(sectors,lbl.r,Z))
+roches.altis <- roches.altis[!is.na(roches.altis$Z),]
+roches.altis <- roches.altis[roches.altis$Z != 0,]
+# roches.altis <- sample_n(roches.altis,100)
+# min(roches.altis$Z)
+plot_ly(data = roches.altis,
+        x = ~sectors,
+        y = ~Z,
+        color = ~sectors,
+        type = 'scatter',
+        alpha = .5,
+        mode = "markers",
+        text = ~lbl.r,
+        hoverinfo = 'text',
+        hovertext = ~lbl.r,
+        name = ~sectors) %>% 
+  add_trace(x=impr.rocks.altis$sectors,
+            y=impr.rocks.altis$Z,
+            type = 'scatter',
+            mode = "markers",
+            # color = "#000000",
+            inherit = F,
+            showlegend = F) %>%
+  # impressive
+  add_annotations(x=impr.rocks.altis$sectors, y=impr.rocks.altis$Z,
+                  text=impr.rocks.altis$lbl,
+                  showarrow=T,
+                  arrowhead=.5) %>%
+  # .. + hyperlink
+  add_trace(
+    mode = 'text',
+    textfont = list(
+      color = 'transparent'
+    ),
+    showlegend = F,
+    inherit = T
+  )
+```
+
+
+# The engravings {#eng}
+
+There is two main techniques with only a narrow regsitry shared
+
+## Pecked engravings {#eng.p}
+
+### Themes {#eng.p.thm}
+
+#### Themes counts {#eng.p.thm.ct}
+
+There's about 20,000 figuratives pecked engravings
+
+```{r lf.figures, echo=FALSE, fig.width=7, fig.height=5}
+# TODO: color chart by c'colors' field
+figures.prem.sum <- figures %>% count(thm, zone)
+# figures.prem.sum <- figures.prem.sum[figures.prem.sum$prem != '',] # rm NA
+# figures.prem.sum <- figures.prem.sum[!(figures.prem.sum$prem %in% thm.not.selected),] # rm N
+# merge to get thm fullname and colors
+figures.prem.sum$lbl <- paste0(figures.prem.sum$thm,'<br>n = ',as.character(figures.prem.sum$n))
+fig.count <- figures.prem.sum %>%
+  plot_ly(x = ~zone,
+          y = ~n,
+          type = 'bar', 
+          text = ~lbl,
+          hoverinfo = 'text',
+          hovertext = ~lbl,
+          name = ~thm,
+          color = ~thm) %>%
+  layout(yaxis = list(title = 'Count'), barmode = 'stack')
+fig.count
+```
+
+The main common engravings are, from large, [horned figures](#eng.p.thm.horn.horn) engraved
+
+```{r lf.figures.circ, fig.width=6, fig.height=4}
+# TODO: color chart by c'colors' field
+figures.prem.sum <- figures %>% count(thm)
+fig <- plot_ly(figures.prem.sum, labels = ~thm, values = ~n, type = 'pie')
+fig <- fig %>% layout(title = 'Total for the main engraved pecked themes',
+                      xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                      yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+
+fig
+```
+
+#### Themes altitudes {#eng.p.thm.alti}
+
+```{r altis.engr, echo=F, fig.width=7, fig.height=10}
+# altis
+figures.altis <- subset(figures, select=c(lbl.r,figure,thm))
+roches.altis <- subset(roches, select=c(sectors,lbl.r,Z))
+figures.altis <- merge(figures.altis,roches.altis, by="lbl.r", all.x=TRUE)
+figures.altis <- figures.altis[figures.altis$sectors == "Les Merveilles", ]
+figures.altis <- figures.altis[!is.na(figures.altis$Z),]
+figures.altis$thm <- factor(figures.altis$thm, levels = unique(figures.altis$thm))
+# figures.altis <- sample_n(figures.altis,250)
+plot_ly(data = figures.altis,
+        x = ~thm,
+        y = ~Z,
+        color = ~thm,
+        type = 'scatter',
+        alpha = .5,
+        mode = "markers"
+)
+```
+
+#### Horned figures and yokes {#eng.p.thm.horn}
+
+##### Horned figures {#eng.p.thm.horn.horn}
+
+#### Anthropomorph {#eng.p.thm.anth}
+
+##### Figures à franges {#eng.p.thm.anth.ff}
+
+#### Geometric
+
+##### Topographic figures {#eng.p.thm.geom.tp}
+
+
+# Impressive rocks {#imprck}
+
+The so-called *impressive rocks* are often those where [anthropomorphs](#eng.p.thm.anth) are engraved; while their represent only a [small part of all figurative engravings](#total.thm).
+
+```{r impr, echo=FALSE}
+impr.rocks <- roches[roches$lbl.r %in% unlist(impr.rocks),]
+impr.rocks$url <- paste0("Z",impr.rocks$zone,"G",impr.rocks$groupe,"R",impr.rocks$roche)
+impr.rocks$nom <- paste0("[",impr.rocks$nom,"](#",impr.rocks$url ,")")
+impr.rocks.list <- subset(impr.rocks, select=c(sectors,nom))
+kable(impr.rocks.list,"html", row.names = F) %>%
+  kable_styling(full_width = FALSE, position = "center", font_size=12)
+#ZVIIGIR8
+```
+
+
+## Sectors and Zones {#SZ}
+
+### **Les Merveilles** sector {#Me}
+
+This is really important..
+
+#### Zones
+
+##### Zone 1 {#Z1}
+
+This is the lowest important concentration of engravings in the Merveilles sector
+
+```{r lf.Z1, echo=FALSE}
+# load the lf map from img/CdT.html
+# knitr::include_url("https://yihui.shinyapps.io/miniUI/")
+# knitr::include_app(paste0(getwd(),"/img/m.html"), height = '600px')
+# htmltools::includeHTML()
+f.lflt.Z(1)
+```
+
+Zone 1 is characterised by numerous figures à franges
+
+##### Zone 4 {#Z4}
+
+```{r lf.Z4, echo=FALSE}
+# load the lf map from img/CdT.html
+# knitr::include_url("https://yihui.shinyapps.io/miniUI/")
+# knitr::include_app(paste0(getwd(),"/img/m.html"), height = '600px')
+# htmltools::includeHTML(paste0(getwd(),"/img/Z4.html"))
+f.lflt.Z(4)
+```
+
+The most known rocks are the HBZZ
+
+###### *Roche de l'Homme aux bras en zigzag* (Z4G3R16D {#Z4G3R16D}
+
+In the Arpette area lies the *Roche de l'Homme aux bras en zigzag* 
+
+```{r lf.HBZZ}
+# load the lf map from img/CdT.html
+# knitr::include_url("https://yihui.shinyapps.io/miniUI/")
+# knitr::include_app(paste0(getwd(),"/img/m.html"), height = '600px')
+# htmltools::includeHTML(paste0(getwd(),"/img/Z4G3R16D.html"))
+f.lflt.aRoche( 4, 3, "16D")
+```
+
+The rocks main figure is an [anthropomorph](#eng.p.thm.anth) with arms in zigzag.
+
+```{r ic.HBZZ}
+# Define variable containing url
+# knitr::include_url(f.ico.aRoche(4,3,"16D")[[1]])
+# url <- f.ico.aRoche(4,3,"16D")[[1]]
+# url <- f.ico.aRoche(4,3,"16D")[[1]]
+# # url <- "http://www.online-image-editor.com//styles/2014/images/example_image.png"
+#  ![Hadley Wickham](`r url`).
+```
+
+##### Zone 7 {#Z7}
+
+The zone 7 covers the Vallée des Merveilles area
+
+```{r lf.Z7}
+# load the lf map from img/CdT.html
+# knitr::include_url("https://yihui.shinyapps.io/miniUI/")
+# knitr::include_app(paste0(getwd(),"/img/m.html"), height = '600px')
+# htmltools::includeHTML(paste0(getwd(),"/img/Z7.html"))
+f.lflt.Z(7)
+```
+
+The most known rocks are the *[Stèle du Chef de Tribu](#Z7G1R8)*, the *[Roche du Christ](#Z7G1R4)* and the *[Paroi Vitrifiée](#Z7G1R17)*
+
+###### *Roche du Christ (Z7G1R4){#Z7G1R4}
+
+This anthropomorph is quite famous
+
+```{r lf.Z7G1R4}
+# htmltools::includeHTML(paste0(getwd(),"/img/Z7G1R4.html"))
+f.lflt.aRoche(7,1,"4")
+```
+
+###### *Stèle du Chef de Tribu* (Z7G1R8){#Z7G1R8}
+
+In the vallées de Merveilles lies the unique stelae of the site, the so-called *Stèle du Chef de Tribu*
+
+```{r lf.Z7G1R8}
+# load the lf map from img/CdT.html
+# knitr::include_url("https://yihui.shinyapps.io/miniUI/")
+# knitr::include_app(paste0(getwd(),"/img/m.html"), height = '600px')
+# htmltools::includeHTML(paste0(getwd(),"/img/Z7G1R8.html"))
+f.lflt.aRoche(7,1,"8")
+```
+
+###### *Paroi Vitrifiée (Z7G1R17){#Z7G1R17}
+
+This very large vertical pared is also the entrance of the Vallée des Merveilles
+
+```{r lf.Z7G1R17}
+# htmltools::includeHTML(paste0(getwd(),"/img/Z7G1R17.html"))
+f.lflt.aRoche(7,1,"7")
+```
+
+Only two pecked daggers at the bottom of the pared. Most of engravings are linear ones made with incisions
+
+##### Zone 11 {#Z11}
+
+###### *Roche de l'Autel* (Z11G0R1) {#Z11G0R1}
+
+This is the rock with the more density of engravings in the whole site
+
+```{r lf.Autel}
+# htmltools::includeHTML(paste0(getwd(),"/img/Z11G0R1.html"))
+f.lflt.aRoche(11,0,"1")
+```
+
+##### Zone 12 {#Z12}
+
+
+```{r lf.Z12}
+# load the lf map from img/CdT.html
+# knitr::include_url("https://yihui.shinyapps.io/miniUI/")
+# knitr::include_app(paste0(getwd(),"/img/m.html"), height = '600px')
+# htmltools::includeHTML(paste0(getwd(),"/img/Z12.html"))
+f.lflt.Z(12)
+```
+
+## *Roche de la grande déesse* (Z12G5R1@a) {#Z12G5R1xa}
+
+This is the highest rock, but also the largest engraving of **Les Merveilles** sector
+
+```{r lf.Gd}
+htmltools::includeHTML(paste0(getwd(),"/img/Z12G5R1xa.html"))
+f.lflt.aRoche(12,5,"1@a")
+```
+
+### **Fontanalba** sector {#Fo}
+
+This is really important..
+
+### **Valaurette** sector {#Vr}
+
+#### Zone 13 {#Z13}
+
+The Zone 13 (ie, the **Valaurette** sector) shows a distinctive profile with almost only [topographic figure](#eng.p.thm.geom.tp)
+
+### **Sainte-Marie** sector {#Sm}
+
+### **Valmasque** sector {#Vm}
+
+### **Col du Sabion** sector {#Cs}
+
+### **Gordolasque** sector {#Go}
+
+It is equivalent to the zone 23 It has a unique engraved rock discovered by J. Begin.
+
+### **Vei del Bouc** sector {#Vb}
+
+# The early occupations {#occup}
+
+## Gias del Ciari {#occup.gias.ciari}
+
+# References
+
+[My PhD (2012)](https://tel.archives-ouvertes.fr/tel-00712290), published in the [*Mémoires de la Société Préhistorique Française (n° 63)* (2017)](http://www.prehistoire.org/shop_515-40342-0-0/m63-2017-les-gravures-piquetees-du-mont-bego-alpes-maritimes-organisation-spatiale-et-seriation-vie-iie-millenaire-av.-j.-c.-t.-huet.html), was dedicated to the mont Bego rock-art (Alpes-Maritimes, France), 
+
+![](http://www.prehistoire.org/offres/file_inline_src/515/515_imgO_020317_092024.jpg){width=250px}]
