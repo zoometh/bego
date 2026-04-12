@@ -30,7 +30,7 @@ def path_to_md_link(path_str):
     
     # print(p, name, encoded_path)
 
-    return f"[{name}]({p})"
+    return f"[{name}]({path_str})"
 
 def update_paths(rows):
     for row in rows:
