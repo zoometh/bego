@@ -1,6 +1,6 @@
 | idroche | alphalabel | total_ff | plan | image |
 | --- | --- | --- | --- | --- |
-| 2.1.9 | ZII.GI.R 9 | 8 | [ZIIGIR9-Fa.gif](D:\Bego\Base_de_Donnees\Images\Images_Faces\ZII\ZIIGI\ZIIGIR9-Fa.gif) | [ZII_GI_R9_B_5.jpg](D:\Bego\Base_de_Donnees\Images\Photos_Roches\ZII\ZIIGI\ZIIGIR9\ZII_GI_R9_B_5.jpg) |
+| 2.1.9 | ZII.GI.R 9 | 8 | [ZIIGIR9-Fa.gif]("D:\Bego\Base_de_Donnees\Images\Images_Faces\ZII\ZIIGI\ZIIGIR9-Fa.gif") | [ZII_GI_R9_B_5.jpg](D:\Bego\Base_de_Donnees\Images\Photos_Roches\ZII\ZIIGI\ZIIGIR9\ZII_GI_R9_B_5.jpg) |
 | 23.1.1 | ZXXIII.GI.R 1 | 7 | [ZXXIIIGIR1-Fa.jpg](D:\Bego\Base_de_Donnees\Images\Images_Faces\ZXXIII\ZXXIIIGIR1-Fa.jpg) | [P8310160.JPG](D:\Bego\Base_de_donnees\Images\Photos_Roches\ZXXIII\P8310160.JPG) |
 | 1.1.6 | ZI.GI.R 6 | 6 | [ZIGIR6.jpg](D:\Bego\Base_de_Donnees\Images\Images_Faces\ZI\ZIGI\ZIGIR6.jpg) | [ZIGIR6.jpg](D:\Bego\Base_de_donnees\Images\Photos_Roches\ZI\ZIGI\ZIGIR6\ZIGIR6.jpg) |
 | 10.2.13A | ZX.GII.R 13A | 5 | [ZXGIIR13A-Fa,c.gif](D:\Bego\Base_de_Donnees\Images\Images_Faces\ZX\ZXGII\ZXGIIR13A-Fa,c.gif) | [P7070042.JPG](D:\Bego\Base_de_Donnees\Images\Photos_Roches\ZX\ZXGII\ZXGIIR13A\P7070042.JPG) |
