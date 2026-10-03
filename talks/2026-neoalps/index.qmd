@@ -141,6 +141,18 @@ viewerZIVGIR10.addHandler("open", function () {
 
 ::: {.panel-tabset}
 
+
+### Location
+
+
+```{=html}
+<div class="iframe-figure">
+  <iframe width="1200" height="400"
+          src="https://iramat-apps.cnrs.fr/project/bego/bego_roches_map_10.3.5@l.html"
+          title="ZXGIIIR5@l"></iframe>
+</div>
+```
+
 ### Engraved rock
 
 <div id="panorama-hl1"
@@ -203,6 +215,7 @@ viewerHL1.addHandler("open", function() {
 });
 </script>
 
+
 ### Engravings
 
 
@@ -210,7 +223,7 @@ viewerHL1.addHandler("open", function() {
 <div class="iframe-figure">
   <iframe width="1200" height="400"
           src="https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZXGIIIR5@l.html"
-          title="ZIGIR4B"></iframe>
+          title="ZXGIIIR5@l"></iframe>
 </div>
 ```
 <div class="captiontext"> <https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZXGIIIR5@l.html></div>
