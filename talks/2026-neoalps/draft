@@ -1,0 +1,76 @@
+
+
+
+## ZX.GIII.R 5 μ (horizon local 2)
+
+<div id="panorama"
+     style="
+       width:100%;
+       height:500px;
+       background:#000;
+       border-radius:4px;
+       overflow:hidden;">
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/5.0.1/openseadragon.min.js"></script>
+
+<script>
+const viewer = OpenSeadragon({
+    id: "panorama",
+
+    prefixUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/openseadragon/5.0.1/images/",
+
+    tileSources: {
+        type: "image",
+        url: "https://iramat-apps.cnrs.fr/iiif/2/bego%2Froches%2FZX%2FZXGIII%2FZXGIIIR5@l%2FZXGIIIR5@l_Hl-%20copie.png/full/full/0/default.jpg"
+    },
+
+    showNavigationControl: false,
+    showNavigator: false,
+
+    visibilityRatio: 1,
+    constrainDuringPan: true,
+
+    minZoomImageRatio: 1,
+
+    gestureSettingsMouse: {
+        scrollToZoom: true,
+        clickToZoom: false,
+        dblClickToZoom: true
+    }
+});
+</script>
+
+
+
+
+## ZX.GIII.R 5 μ (horizon local)
+
+<div id="panorama" style="width:100%; height:600px; background:black;"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/5.0.1/openseadragon.min.js"></script>
+
+<script>
+OpenSeadragon({
+    id: "panorama",
+    prefixUrl: "https://cdnjs.cloudflare.com/ajax/libs/openseadragon/5.0.1/images/",
+    
+    tileSources: {
+        type: "image",
+        url: "https://iramat-apps.cnrs.fr/iiif/2/bego%2Froches%2FZX%2FZXGIII%2FZXGIIIR5@l%2FZXGIIIR5@l_Hl-%20copie.png/full/full/0/default.jpg"
+    },
+
+    showNavigator: true,
+    showFullPageControl: true,
+    showHomeControl: true,
+    showZoomControl: true,
+
+    gestureSettingsMouse: {
+        clickToZoom: false,
+        dblClickToZoom: true
+    }
+});
+</script>
+
+![](img/ZXGIIIR5@l_Hl.png){height=500}

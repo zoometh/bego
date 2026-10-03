@@ -1,11 +1,12 @@
 # Bego
+> Système d'information
 
 ## Architecture actuelle
 
 
 ```mermaid
 flowchart TD
-    subgraph server
+    subgraph server[server IRAMAT]
         DBimg[(ubuntu/data/images/bego/)] ---> IIIFimg([API Image])
         subgraph IRAMATiiif[IIIF]
             IIIFimg ---> IIIFpres([API presentation])
@@ -18,9 +19,9 @@ flowchart TD
         DB[(PostgreSQL)] -- roches (vue) --> GS{{GeoServer}}
         GS -- roches (WFS) --> Python
     end
-  subgraph webbrowser
-    IIIFpres -- créé -->  outIIIF[viewer Mirador]
-    Python -- créé --> outHTML[carte dynamique HTML]
+  subgraph out[web browser]
+    IIIFpres -- créer -->  outIIIF[viewer Mirador]
+    Python -- créer --> outHTML[carte dynamique HTML]
   end
  
 
@@ -31,9 +32,10 @@ style IIIFimg fill:#f6f7d5
 style IIIFpres fill:#f6f7d5
 style Python fill:#8794ff
 style GS fill:#8794ff
+
 style outIIIF fill:#b0ffc3
 style outHTML fill:#b0ffc3
-style webbrowser fill:#42ff70
+style out fill:#42ff70
 
 ```
 

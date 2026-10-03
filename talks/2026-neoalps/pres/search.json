@@ -7,157 +7,66 @@
     "text": "Map\n\n  \n\n\nRocks with pecked engravings https://iramat-apps.cnrs.fr/project/bego/bego_roches_map.html"
   },
   {
-    "objectID": "index.html#zigir4b",
-    "href": "index.html#zigir4b",
+    "objectID": "index.html#roche-au-grand-réticulé-complexe",
+    "href": "index.html#roche-au-grand-réticulé-complexe",
     "title": "The Fringed Figures",
-    "section": "ZIGIR4B",
-    "text": "ZIGIR4B\n\n  \n\n\nZIGIR4B https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIGIR4B.html"
+    "section": "Roche au grand réticulé complexe",
+    "text": "Roche au grand réticulé complexe\n\nEngraved rockEngravingsLocal view\n\n\n\n\n\n\n  \n\n\nhttps://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIVGIR10@c.html"
   },
   {
-    "objectID": "index.html#zigir5",
-    "href": "index.html#zigir5",
+    "objectID": "index.html#roche-des-figures-à-franges-et-du-double-zigzag",
+    "href": "index.html#roche-des-figures-à-franges-et-du-double-zigzag",
     "title": "The Fringed Figures",
-    "section": "ZIGIR5",
-    "text": "ZIGIR5\n\n  \n\n\nZIGIR5 https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIGIR5.html"
+    "section": "Roche des figures à franges et du double zigzag",
+    "text": "Roche des figures à franges et du double zigzag\n\nEngraved rockEngravingsLocal view\n\n\n\n\n\n\n\n\n\n  \n\n\nhttps://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZXGIIIR5@l.html"
   },
   {
-    "objectID": "index.html#des-images-pour-les-archéologues",
-    "href": "index.html#des-images-pour-les-archéologues",
+    "objectID": "index.html#roche-du-grand-goulet-herbeux",
+    "href": "index.html#roche-du-grand-goulet-herbeux",
     "title": "The Fringed Figures",
-    "section": "Des images pour les archéologues",
-    "text": "Des images pour les archéologues\n\n\n\n\n\nIdentification/comptage des graines (INRAP/MNHN 2023)\n\n\n\n\nApprentissage machine pour la détermination des espèces domestiquées/non domestiquées (Bonhomme et al. 2025)"
+    "section": "Roche du grand goulet herbeux",
+    "text": "Roche du grand goulet herbeux\n\nEngraved rockEngravingsLocal view\n\n\nTODO\n\n\n\n  \n\n\nhttps://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIIGIIIR7.html"
   },
   {
-    "objectID": "index.html#iiif-standard-dintéropérabilité-des-images",
-    "href": "index.html#iiif-standard-dintéropérabilité-des-images",
+    "objectID": "index.html#superimpositions-and-associations",
+    "href": "index.html#superimpositions-and-associations",
     "title": "The Fringed Figures",
-    "section": "IIIF: standard d’intéropérabilité des images",
-    "text": "IIIF: standard d’intéropérabilité des images\n\nDéfinitionMotivationFonctionnementEléments clefs\n\n\n\n\nInternational Image Interoperability Framework  \n\n\n\n\n\n\n\nNote\n\n\nDéveloppé au début des années 2010 (community lead), ISO 21127:2019.\n\n\n\n\n\n\n\nCommunautés d’utilisateurs et de développeurs issues des musées, bibliothèques, archives, universités, etc., nécessitant partager des images haute résolution, des annotations, des pratiques de nommage, etc.\n\n≠ silo de données \n\n\n\n\n\n\n\n\nLes images  existent à un endroit\n🍃 baisse des coûts de stockage\n🔍 image indexée par une URL1\n✒️ meilleure gestion des réutilisations\n🎮 meilleure expérience utilisateur\n🏷️ sémantisation de régions de l’image\n👥 aggrégation de collections (APIs partagées)\n\n\n\n\n\n\n\n\nImage source2\n\n\n  \n\n\n\n\nmanifest3"
+    "section": "Superimpositions and associations",
+    "text": "Superimpositions and associations\n\nRoche rougeRoche visible au soleil rasantRoche des six plages\n\n\n\n  \n\n\nhttps://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIGIR4B.html\n\n\n\n\n  \n\n\nhttps://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIIGIR9.html\n\n\n\n\n  \n\n\nhttps://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIGIR5.html"
   },
   {
-    "objectID": "index.html#image-source-default",
-    "href": "index.html#image-source-default",
+    "objectID": "index.html#superimpositions",
+    "href": "index.html#superimpositions",
     "title": "The Fringed Figures",
-    "section": "Image source (default)",
-    "text": "Image source (default)\nhttps://iramat-apps.cnrs.fr/iiif/2/numismatic%2F1986.416_obv.JPG/full/full/0/default.jpg"
+    "section": "Superimpositions",
+    "text": "Superimpositions\nhttps://iramat-apps.cnrs.fr/view/bego/varia/superpositions_v.html"
   },
   {
-    "objectID": "index.html#image-source-region",
-    "href": "index.html#image-source-region",
+    "objectID": "index.html#section",
+    "href": "index.html#section",
     "title": "The Fringed Figures",
-    "section": "Image source (region)",
-    "text": "Image source (region)\nhttps://iramat-apps.cnrs.fr/iiif/2/numismatic%2F1986.416_obv.JPG/889,806,1697,635/full/0/default.jpg"
+    "section": "",
+    "text": "Animating content"
   },
   {
-    "objectID": "index.html#image-source-scale",
-    "href": "index.html#image-source-scale",
+    "objectID": "index.html#section-1",
+    "href": "index.html#section-1",
     "title": "The Fringed Figures",
-    "section": "Image source (scale)",
-    "text": "Image source (scale)\nhttps://iramat-apps.cnrs.fr/iiif/2/numismatic%2F1986.416_obv.JPG/full/pct:7/0/default.jpg"
+    "section": "",
+    "text": "Animating content"
   },
   {
-    "objectID": "index.html#image-source-rotation",
-    "href": "index.html#image-source-rotation",
+    "objectID": "index.html#section-2",
+    "href": "index.html#section-2",
     "title": "The Fringed Figures",
-    "section": "Image source (rotation)",
-    "text": "Image source (rotation)\nhttps://iramat-apps.cnrs.fr/iiif/2/numismatic%2F1986.416_obv.JPG/full/full/180/default.jpg"
+    "section": "",
+    "text": "Animating content"
   },
   {
-    "objectID": "index.html#image-source-quality",
-    "href": "index.html#image-source-quality",
+    "objectID": "index.html#section-3",
+    "href": "index.html#section-3",
     "title": "The Fringed Figures",
-    "section": "Image source (quality)",
-    "text": "Image source (quality)\nhttps://iramat-apps.cnrs.fr/iiif/2/numismatic%2F1986.416_obv.JPG/full/full/0/gray.jpg"
-  },
-  {
-    "objectID": "index.html#image",
-    "href": "index.html#image",
-    "title": "The Fringed Figures",
-    "section": "Image",
-    "text": "Image\nhttps://iramat-apps.cnrs.fr/view/acies/arl-x-s-1_side-1.html"
-  },
-  {
-    "objectID": "index.html#séquence-dimages",
-    "href": "index.html#séquence-dimages",
-    "title": "The Fringed Figures",
-    "section": "Séquence d’images",
-    "text": "Séquence d’images\nhttps://iramat-apps.cnrs.fr/view/numismatic/1986.416.html"
-  },
-  {
-    "objectID": "index.html#collection-dimages",
-    "href": "index.html#collection-dimages",
-    "title": "The Fringed Figures",
-    "section": "Collection d’images",
-    "text": "Collection d’images\nhttps://iramat-apps.cnrs.fr/view/iramat_iiif.html"
-  },
-  {
-    "objectID": "index.html#aggrégation-de-collections-12",
-    "href": "index.html#aggrégation-de-collections-12",
-    "title": "The Fringed Figures",
-    "section": "Aggrégation de collections (1/2)",
-    "text": "Aggrégation de collections (1/2)\nhttps://iramat-apps.cnrs.fr/view/iramat_bnf_iiif.html"
-  },
-  {
-    "objectID": "index.html#aggrégation-de-collections-22",
-    "href": "index.html#aggrégation-de-collections-22",
-    "title": "The Fringed Figures",
-    "section": "Aggrégation de collections (2/2)",
-    "text": "Aggrégation de collections (2/2)\nhttps://vikusviewer.fh-potsdam.de/muenzen/vis/"
-  },
-  {
-    "objectID": "index.html#exposition-virtuelle",
-    "href": "index.html#exposition-virtuelle",
-    "title": "The Fringed Figures",
-    "section": "Exposition virtuelle",
-    "text": "Exposition virtuelle\nhttp://lotb.iath.virginia.edu/mirador_viewer/mirador?manifest=1&room_id=1"
-  },
-  {
-    "objectID": "index.html#en-résumé",
-    "href": "index.html#en-résumé",
-    "title": "The Fringed Figures",
-    "section": "En résumé",
-    "text": "En résumé\nhttps://iramat-apps.cnrs.fr/view/creuset.html"
-  },
-  {
-    "objectID": "index.html#webservice-hébergé-à-liramat",
-    "href": "index.html#webservice-hébergé-à-liramat",
-    "title": "The Fringed Figures",
-    "section": "Webservice hébergé à l’IRAMAT",
-    "text": "Webservice hébergé à l’IRAMAT\nhttps://iramat-apps.cnrs.fr/iiif-loader/"
-  },
-  {
-    "objectID": "index.html#présenter-en-iiif",
-    "href": "index.html#présenter-en-iiif",
-    "title": "The Fringed Figures",
-    "section": "Présenter en IIIF",
-    "text": "Présenter en IIIF\nhttps://colab.research.google.com/github/iramat/iramat-dev/blob/main/iiif/exemples/Exemple_de_pr%C3%A9sentation_IIIF.ipynb"
-  },
-  {
-    "objectID": "index.html#maturation-logicielle",
-    "href": "index.html#maturation-logicielle",
-    "title": "The Fringed Figures",
-    "section": "Maturation logicielle",
-    "text": "Maturation logicielle\n\n  \n\n\n\n\n\n\n1. Prototype\n\n\n👉 2. Self-service\n\n\n3. CMS\n\n\n\n\nIIIF ponctuel. L’ingénieur assure le service informatique pour un projet particulier, pas d’automatisation possible.\n\n\nIIIF réutilisable avec une documentation. Tâches de base automatisées. L’ingénieur assure les fonctionnalités avancées (ex : annotations, collections).\n\n\nIIIF intégré à un CMS4. Autonomie des tâches CRUD. L’ingénieur gère les utilisateurs et maintient le système."
-  },
-  {
-    "objectID": "index.html#flux-de-données",
-    "href": "index.html#flux-de-données",
-    "title": "The Fringed Figures",
-    "section": "Flux de données",
-    "text": "Flux de données\n\n\n\n\n\nflowchart LR\n  subgraph IRAMAT[&lt;b&gt;IRAMAT&lt;/b&gt;]\n    ICP{{ICP-MS}}\n    XRD{{XRD}}\n    XRF{{XRF}}\n    BD[(DB)]\n    analyses[archaeometry analysis]\n    analyses --&gt; IRAMATdata\n    analyses --&gt; IRAMATimg\n    subgraph VM[VM]\n    subgraph IRAMATdata[Scalar measurements]\n        XRF --&gt; BD\n        XRD --&gt; BD\n        ICP --&gt; BD\n        BD -- API RESTful --&gt; APIdata[&lt;em&gt;labeled data&lt;/em&gt;]\n    end\n    subgraph IRAMATimg[Imaging]\n        Macro{{Macro-&lt;br&gt;photography}} -- format --&gt; IIIFimg([IIIF image])\n        Opt{{Optical&lt;br&gt;Microscopy}} -- format --&gt; IIIFimg\n        SEM{{SEM-EDS}} -- format --&gt; IIIFimg\n        Raman{{Raman}} -- format --&gt; IIIFimg\n        IIIFimg ---&gt; IIIFpres([IIIF presentation])\n        IIIFpres --&gt; IIIFannot([IIIF annotation])\n        IIIFannot -- manifests&lt;br&gt;annotations --&gt; BD\n        BD -- API RESTful --&gt; APIimg[&lt;em&gt;labeled images&lt;/em&gt;]\n    end\n    end\n  end\n  APIdata ---&gt; PyExtract[&lt;em&gt;Data Fusion&lt;/em&gt;]\n  APIimg ---&gt; PyExtract\n  subgraph BSC[&lt;b&gt;BSC&lt;/b&gt;]\n    PyExtract -- creates --&gt; MLlearn[(learning base)]\n    subgraph ML[Machine Learning]\n      MLlearn ---&gt; MLvalid[validation]\n      MLvalid ---&gt; MLtest[test]\n      MLtest --&gt; MLlearn\n    end\n  end\n    subgraph out[&lt;b&gt;Automatic Classification&lt;/b&gt;]\n      ResMet[archaeometallurgical facies]\n      ResNum[numismatic coins]\n    end\n  ML ---&gt; out\n\nstyle BD fill:#cccccc\n\nstyle IRAMAT fill:#edfa05\nstyle VM fill:#f4fa82\nstyle analyses fill:#fbfcd7\nstyle IRAMATdata fill:#fbfcd7\nstyle IRAMATimg fill:#fbfcd7\nstyle XRF fill:#f6f7d5\nstyle XRD fill:#f6f7d5\nstyle ICP fill:#f6f7d5\nstyle Macro fill:#f6f7d5\nstyle Opt fill:#f6f7d5\nstyle SEM fill:#f6f7d5\nstyle Raman fill:#f6f7d5\nstyle IIIFimg fill:#f6f7d5\nstyle IIIFpres fill:#f6f7d5\nstyle IIIFannot fill:#f6f7d5\nstyle BD fill:#c9c9c9\nstyle APIdata fill:#f6f7d5\nstyle APIimg fill:#f6f7d5\n\nstyle BSC fill:#919cfa\nstyle PyExtract fill:#8794ff\nstyle ML fill:#8794ff\nstyle MLlearn fill:#d9ddff\nstyle MLvalid fill:#d9ddff\nstyle MLtest fill:#d9ddff\n\nstyle out fill:#42ff70\nstyle ResMet fill:#b0ffc3\nstyle ResNum fill:#b0ffc3\n\nclick BD \"https://github.com/iramat/iramat-dev/main/talks/2026-bsc/README.md#db\"\nclick VM \"https://github.com/iramat/iramat-dev/main/talks/2026-bsc/README.md#vm\"\nclick IIIFimg \"https://github.com/iramat/iramat-dev/main/talks/2026-bsc/README.md#iiif-image\"\nclick IIIFpres \"https://github.com/iramat/iramat-dev/main/talks/2026-bsc/README.md#iiif-presentation\"\nclick IIIFannot \"https://github.com/iramat/iramat-dev/main/talks/2026-bsc/README.md#iiif-annotation\"\n\n\n\n\n\n\n\nData pipeline vers du Machine learning\n\n\n\n\n\n\n\n\nNote\n\n\nUtilisez la touche ALT + clic gauche pour zoomer/dézoomer sur le diagramme"
-  },
-  {
-    "objectID": "index.html#récapitulatif",
-    "href": "index.html#récapitulatif",
-    "title": "The Fringed Figures",
-    "section": "Récapitulatif",
-    "text": "Récapitulatif\nWebservice iiif-loader pour héberger vos images en  sur le site de l’IRAMAT (https://iramat-apps.cnrs.fr/) \n\nEt pour participer à la FAIRisation des données de l’IRAMAT\n\n\n https://github.com/iramat5   https://zenodo.org/communities/iramat6\n\n👉 s’inscrire  👉 s’inscrire\n\n::::\nEt contacter: 👋 thomas.huet@cnrs.fr"
-  },
-  {
-    "objectID": "index.html#footnotes",
-    "href": "index.html#footnotes",
-    "title": "The Fringed Figures",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nUniform Resource Locator (URL) -&gt; Uniform Resource Identifiers (URI)\nhttps://iramat-apps.cnrs.fr/iiif/2/numismatic%2F1986.416_obv.JPG/full/full/0/default.jpg\nhttps://iramat-apps.cnrs.fr/iiif/mirador/cdn/numismatic/1986.416.json\nContent Management System, c.-à-d. système de gestion des contenus (ex : Omeka S, Drupal)\npublier du code open-source, référentiels, données publiques, …\npublier des documents de données, édition/sélection des métadonnées,…"
+    "section": "",
+    "text": "Animating content"
   }
 ]

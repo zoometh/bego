@@ -69,8 +69,9 @@ VALUES
 ```
 
 ## Figures
+> ⚠️ MAJUSCULE _vs_ minuscule dans le nom de la vue
 
-/!\ MAJUSCULE vs minuscule dans le nom de la vue
+Comprend les superpositions
 
 ```sql
 CREATE OR REPLACE VIEW roches_ff_tot AS
@@ -95,4 +96,20 @@ INSERT INTO public.gt_pk_metadata_table
     (table_schema, table_name, pk_column, pk_column_idx, pk_policy)
 VALUES
     ('public', 'roches_ff_tot', 'id', 1, 'assigned');
+```
+
+### superpositions
+
+<!-- Servies sur l'API (pas le GS) -->
+
+```sql
+CREATE OR REPLACE VIEW superpositions AS
+ SELECT idsuper as id,
+    labelfig_1 as fig1,
+    labelfig_1 as fig2,
+    relation as fig1_to_fig2,
+    description,
+    img_superposition,
+  FROM superpositions
+  ORDER BY labelfig_1 DESC;
 ```
