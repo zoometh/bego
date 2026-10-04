@@ -131,7 +131,7 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="https://raw.githubusercontent.com/iramat/iramat-dev/master/img/ana-xrf-pymca-ex.png" data-background-opacity="0.2" data-background-size="90%" data-notes="Lorem" class="quarto-title-block center">
+<section id="title-slide" data-background-image="img/Lac Long Sup.jpg" data-background-opacity="0.5" data-background-size="100%" data-notes="Lorem" class="quarto-title-block center">
   <h1 class="title">The Fringed Figures</h1>
   <p class="subtitle"><em>Figures à franges (mont Bego, Alpes-Maritimes, France)</em></p>
 
@@ -148,41 +148,126 @@ Thomas Huet
 
 </section>
 <section>
-<section id="site-presentation" class="title-slide slide level1 center" data-background-image="https://raw.githubusercontent.com/iramat/iramat-dev/master/img/iiif-pres-collection-multi.png" data-background-opacity="0.2" data-background-size="400px" data-background-repeat="repeat">
+<section id="site-presentation" class="title-slide slide level1 center" data-background-image="img/Lac Long Sup.jpg" data-background-opacity="0.5">
 <h1>Site presentation</h1>
 
 </section>
-<section id="map" class="slide level2">
-<h2>Map</h2>
+<section id="site-map" class="slide level2">
+<h2>Site map</h2>
 <div class="iframe-figure">
-  <iframe width="1200" height="500" src="https://iramat-apps.cnrs.fr/project/bego/bego_roches_map.html" title="ZIGIR4B"></iframe>
+  <iframe width="1200" height="530" src="https://iramat-apps.cnrs.fr/project/bego/bego_roches_map.html" title="ZIGIR4B"></iframe>
 </div>
 <div class="captiontext">
 Rocks with pecked engravings <a href="https://iramat-apps.cnrs.fr/project/bego/bego_roches_map.html" class="uri">https://iramat-apps.cnrs.fr/project/bego/bego_roches_map.html</a>
 </div>
 </section></section>
 <section>
-<section id="figures-à-franges" class="title-slide slide level1 center" data-background-image="https://raw.githubusercontent.com/iramat/iramat-dev/master/img/iiif-pres-collection-multi.png" data-background-opacity="0.2" data-background-size="400px" data-background-repeat="repeat">
-<h1>Figures à franges</h1>
+<section id="fringed-figures" class="title-slide slide level1 center" data-background-image="img/Lac Long Sup.jpg" data-background-opacity="0.5">
+<h1>Fringed figures</h1>
 
+</section>
+<section id="roche-du-grand-goulet-herbeux" class="slide level2">
+<h2>Roche du grand goulet herbeux</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Location</a></li><li><a href="#tabset-1-2">Engraved rock</a></li><li><a href="#tabset-1-3">Engravings</a></li><li><a href="#tabset-1-4">Local view</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="iframe-figure">
+  <iframe width="1200" height="400" src="https://iramat-apps.cnrs.fr/project/bego/bego_roches_map_2.3.7.html" title="ZXGIIIR5@l"></iframe>
+</div>
+</div>
+<div id="tabset-1-2">
+<div class="iframe-figure">
+  <iframe width="1200" height="400" src="https://iramat-apps.cnrs.fr/view/bego/roches/ZII/ZIIGIII/ZIIGIIIR7/P9050480.html" title="ZIVGIR10@c"></iframe>
+</div>
+<div class="captiontext">
+<a href="https://iramat-apps.cnrs.fr/view/bego/roches/ZII/ZIIGIII/ZIIGIIIR7/P9050480.html" class="uri">https://iramat-apps.cnrs.fr/view/bego/roches/ZII/ZIIGIII/ZIIGIIIR7/P9050480.html</a>
+</div>
+</div>
+<div id="tabset-1-3">
+<div class="iframe-figure">
+  <iframe width="1200" height="400" src="https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIIGIIIR7.html" title="ZIGIR4B"></iframe>
+</div>
+<div class="captiontext">
+<a href="https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIIGIIIR7.html" class="uri">https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIIGIIIR7.html</a>
+</div>
+</div>
+<div id="tabset-1-4">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/5.0.1/openseadragon.min.js"></script>
+<div id="panorama-ziigiiir7" style="
+       width:100%;
+       height:400px;
+       background:#fff;
+       border-radius:4px;
+       overflow:hidden;">
+
+</div>
+<script>
+const viewerZIIGIIIR7 = OpenSeadragon({
+    id: "panorama-ziigiiir7",
+
+    prefixUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/openseadragon/5.0.1/images/",
+
+    tileSources: {
+        type: "image",
+        url: "https://iramat-apps.cnrs.fr/iiif/2/bego%2Froches%2FZII%2FZIIGIII%2FZIIGIIIR7%2Fdepuis%20ZIIGIIIR7.jpg/full/full/0/default.jpg"
+    },
+
+    showNavigationControl: false,
+    showNavigator: false,
+
+    visibilityRatio: 1,
+    constrainDuringPan: true,
+
+    gestureSettingsMouse: {
+        scrollToZoom: true,
+        clickToZoom: false,
+        dblClickToZoom: true
+    }
+});
+
+viewerZIIGIIIR7.addHandler("open", function () {
+    const homeZoom = viewerZIIGIIIR7.viewport.getHomeZoom();
+
+    viewerZIIGIIIR7.viewport.zoomTo(
+        homeZoom * 2,
+        viewerZIIGIIIR7.viewport.getCenter(),
+        true
+    );
+});
+</script>
+</div>
+</div>
+</div>
 </section>
 <section id="roche-au-grand-réticulé-complexe" class="slide level2">
 <h2>Roche au grand réticulé complexe</h2>
 <div class="panel-tabset">
-<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Engraved rock</a></li><li><a href="#tabset-1-2">Engravings</a></li><li><a href="#tabset-1-3">Local view</a></li></ul>
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Location</a></li><li><a href="#tabset-2-2">Engraved rock</a></li><li><a href="#tabset-2-3">Engravings</a></li><li><a href="#tabset-2-4">Local view</a></li></ul>
 <div class="tab-content">
-<div id="tabset-1-1">
-<p><img data-src="https://iramat-apps.cnrs.fr/iiif/2/bego%2Froches%2FZIV%2FZIVGI%2FZIVGIR10%40c%2FP8270046.JPG/full/full/0/default.jpg" height="400"></p>
-</div>
-<div id="tabset-1-2">
+<div id="tabset-2-1">
 <div class="iframe-figure">
-  <iframe width="1200" height="400" src="https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIVGIR10@c.html" title="ZIGIR4B"></iframe>
+  <iframe width="1200" height="400" src="https://iramat-apps.cnrs.fr/project/bego/bego_roches_map_4.1.10@c.html" title="ZXGIIIR5@l"></iframe>
+</div>
+</div>
+<div id="tabset-2-2">
+<div class="iframe-figure">
+  <iframe width="1200" height="400" src="https://iramat-apps.cnrs.fr/view/bego/roches/ZIV/ZIVGI/ZIVGIR10@c/P8270046.html" title="ZIVGIR10@c"></iframe>
+</div>
+<div class="captiontext">
+<a href="https://iramat-apps.cnrs.fr/view/bego/roches/ZIV/ZIVGI/ZIVGIR10@c/P8270046.html" class="uri">https://iramat-apps.cnrs.fr/view/bego/roches/ZIV/ZIVGI/ZIVGIR10@c/P8270046.html</a>
+</div>
+</div>
+<div id="tabset-2-3">
+<div class="iframe-figure">
+  <iframe width="1200" height="400" src="https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIVGIR10@c.html" title="ZIVGIR10@c"></iframe>
 </div>
 <div class="captiontext">
 <a href="https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIVGIR10@c.html" class="uri">https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIVGIR10@c.html</a>
 </div>
 </div>
-<div id="tabset-1-3">
+<div id="tabset-2-4">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/5.0.1/openseadragon.min.js"></script>
 <div id="panorama-zivgir10" style="
        width:100%;
@@ -241,14 +326,14 @@ viewerZIVGIR10.addHandler("open", function () {
 <section id="roche-des-figures-à-franges-et-du-double-zigzag" class="slide level2">
 <h2><small>Roche des figures à franges et du double zigzag</small></h2>
 <div class="panel-tabset">
-<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Location</a></li><li><a href="#tabset-2-2">Engraved rock</a></li><li><a href="#tabset-2-3">Engravings</a></li><li><a href="#tabset-2-4">Local view</a></li></ul>
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Location</a></li><li><a href="#tabset-3-2">Engraved rock</a></li><li><a href="#tabset-3-3">Engravings</a></li><li><a href="#tabset-3-4">Local view</a></li></ul>
 <div class="tab-content">
-<div id="tabset-2-1">
+<div id="tabset-3-1">
 <div class="iframe-figure">
   <iframe width="1200" height="400" src="https://iramat-apps.cnrs.fr/project/bego/bego_roches_map_10.3.5@l.html" title="ZXGIIIR5@l"></iframe>
 </div>
 </div>
-<div id="tabset-2-2">
+<div id="tabset-3-2">
 <div id="panorama-hl1" style="width:100%; height:500px; background:#fff;">
 
 </div>
@@ -308,7 +393,7 @@ viewerHL1.addHandler("open", function() {
 });
 </script>
 </div>
-<div id="tabset-2-3">
+<div id="tabset-3-3">
 <div class="iframe-figure">
   <iframe width="1200" height="400" src="https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZXGIIIR5@l.html" title="ZXGIIIR5@l"></iframe>
 </div>
@@ -316,7 +401,7 @@ viewerHL1.addHandler("open", function() {
 <a href="https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZXGIIIR5@l.html" class="uri">https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZXGIIIR5@l.html</a>
 </div>
 </div>
-<div id="tabset-2-4">
+<div id="tabset-3-4">
 <div id="panorama-hl2" style="
        width:100%;
        height:500px;
@@ -364,70 +449,6 @@ viewerHL2.addHandler("open", function () {
 </div>
 </div>
 </section>
-<section id="roche-du-grand-goulet-herbeux" class="slide level2">
-<h2>Roche du grand goulet herbeux</h2>
-<div class="panel-tabset">
-<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Engraved rock</a></li><li><a href="#tabset-3-2">Engravings</a></li><li><a href="#tabset-3-3">Local view</a></li></ul>
-<div class="tab-content">
-<div id="tabset-3-1">
-<p>TODO</p>
-</div>
-<div id="tabset-3-2">
-<div class="iframe-figure">
-  <iframe width="1200" height="500" src="https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIIGIIIR7.html" title="ZIGIR4B"></iframe>
-</div>
-<div class="captiontext">
-<a href="https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIIGIIIR7.html" class="uri">https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIIGIIIR7.html</a>
-</div>
-</div>
-<div id="tabset-3-3">
-<div id="panorama-ziigiiir7" style="
-       width:100%;
-       height:500px;
-       background:#fff;
-       border-radius:4px;
-       overflow:hidden;">
-
-</div>
-<script>
-const viewerZIIGIIIR7 = OpenSeadragon({
-    id: "panorama-ziigiiir7",
-
-    prefixUrl:
-      "https://cdnjs.cloudflare.com/ajax/libs/openseadragon/5.0.1/images/",
-
-    tileSources: {
-        type: "image",
-        url: "https://iramat-apps.cnrs.fr/iiif/2/bego%2Froches%2FZII%2FZIIGIII%2FZIIGIIIR7%2Fdepuis%20ZIIGIIIR7.jpg/full/full/0/default.jpg"
-    },
-
-    showNavigationControl: false,
-    showNavigator: false,
-
-    visibilityRatio: 1,
-    constrainDuringPan: true,
-
-    gestureSettingsMouse: {
-        scrollToZoom: true,
-        clickToZoom: false,
-        dblClickToZoom: true
-    }
-});
-
-viewerZIIGIIIR7.addHandler("open", function () {
-    const homeZoom = viewerZIIGIIIR7.viewport.getHomeZoom();
-
-    viewerZIIGIIIR7.viewport.zoomTo(
-        homeZoom * 2,
-        viewerZIIGIIIR7.viewport.getCenter(),
-        true
-    );
-});
-</script>
-</div>
-</div>
-</div>
-</section>
 <section id="superimpositions-and-associations" class="slide level2">
 <h2>Superimpositions and associations</h2>
 <div class="panel-tabset">
@@ -459,46 +480,13 @@ viewerZIIGIIIR7.addHandler("open", function () {
 </div>
 </div>
 </div>
-</section></section>
-<section>
-<section id="annexes" class="title-slide slide level1 center">
-<h1>Annexes</h1>
-
-</section>
-<section id="superimpositions" class="slide level2">
-<h2>Superimpositions</h2>
-<p>https://iramat-apps.cnrs.fr/view/bego/varia/superpositions_v.html</p>
-</section>
-<section id="section" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title"></h2>
-<div style="margin-top: 100px;">
-<p>Animating content <img data-src="img/var_extrin.jpg" height="500"></p>
-</div>
-</section>
-<section id="section-1" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title"></h2>
-<div style="margin-top: 100px;">
-<p>Animating content <img data-src="img/var_intrin.jpg" height="500"> <img data-src="img/var_extrin.jpg" height="500"></p>
-</div>
-</section>
-<section id="section-2" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title"></h2>
-<div style="margin-top: 100px;">
-<p>Animating content <img data-src="img/fig 2.jpg" height="500"> <img data-src="img/var_intrin.jpg" height="500"></p>
-</div>
-</section>
-<section id="section-3" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title"></h2>
-<div style="margin-top: 100px;">
-<p>Animating content <img data-src="img/fig 2.jpg" height="500"> <img data-src="img/var_intrin.jpg" height="500"></p>
-</div>
 
 
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>T. Huet - <img src="https://raw.githubusercontent.com/zoometh/thomashuet/master/img/inst-neoalps26.png" style="height: 30px;vertical-align: middle;"> - XX October, 2026, Sion, Switzerland</p>
+<p>Thomas Huet - <img src="https://raw.githubusercontent.com/zoometh/thomashuet/master/img/inst-neoalps26.png" style="height: 25px;vertical-align: middle;"> colloque international, Sion (Valais, Suisse) 7-10 octobre 2026</p>
 </div>
 </div></div>
 

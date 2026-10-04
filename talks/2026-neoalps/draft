@@ -1,4 +1,36 @@
 
+## {auto-animate=true}
+
+
+::: {style="margin-top: 100px;"}
+Animating content
+![](img/var_extrin.jpg){height=500}
+:::
+
+## {auto-animate=true}
+
+
+::: {style="margin-top: 100px;"}
+Animating content
+![](img/var_intrin.jpg){height=500}
+![](img/var_extrin.jpg){height=500}
+:::
+
+## {auto-animate=true}
+
+::: {style="margin-top: 100px;"}
+Animating content
+![](img/fig 2.jpg){height=500}
+![](img/var_intrin.jpg){height=500}
+:::
+
+## {auto-animate=true}
+
+::: {style="margin-top: 100px;"}
+Animating content
+![](img/fig 2.jpg){height=500}
+![](img/var_intrin.jpg){height=500}
+:::
 
 
 ## ZX.GIII.R 5 μ (horizon local 2)
@@ -23,7 +55,7 @@ const viewer = OpenSeadragon({
 
     tileSources: {
         type: "image",
-        url: "https://iramat-apps.cnrs.fr/iiif/2/bego%2Froches%2FZX%2FZXGIII%2FZXGIIIR5@l%2FZXGIIIR5@l_Hl-%20copie.png/full/full/0/default.jpg"
+        url: "https://iramat-apps.cnrs.fr/iiif/2/bego%2Froches%2FZIV%2FZIVGI%2FZIVGIR10%40c%2FZIVGIR10%40c_HL.jpg/full/full/0/default.jpg"
     },
 
     showNavigationControl: false,
@@ -74,3 +106,9 @@ OpenSeadragon({
 </script>
 
 ![](img/ZXGIIIR5@l_Hl.png){height=500}
+
+# Annexes
+
+## Superimpositions
+
+https://iramat-apps.cnrs.fr/view/bego/varia/superpositions_v.html

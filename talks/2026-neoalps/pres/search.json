@@ -1,17 +1,24 @@
 [
   {
-    "objectID": "index.html#map",
-    "href": "index.html#map",
+    "objectID": "index.html#site-map",
+    "href": "index.html#site-map",
     "title": "The Fringed Figures",
-    "section": "Map",
-    "text": "Map\n\n  \n\n\nRocks with pecked engravings https://iramat-apps.cnrs.fr/project/bego/bego_roches_map.html"
+    "section": "Site map",
+    "text": "Site map\n\n  \n\n\nRocks with pecked engravings https://iramat-apps.cnrs.fr/project/bego/bego_roches_map.html"
+  },
+  {
+    "objectID": "index.html#roche-du-grand-goulet-herbeux",
+    "href": "index.html#roche-du-grand-goulet-herbeux",
+    "title": "The Fringed Figures",
+    "section": "Roche du grand goulet herbeux",
+    "text": "Roche du grand goulet herbeux\n\nLocationEngraved rockEngravingsLocal view\n\n\n\n  \n\n\n\n\n  \n\n\nhttps://iramat-apps.cnrs.fr/view/bego/roches/ZII/ZIIGIII/ZIIGIIIR7/P9050480.html\n\n\n\n\n  \n\n\nhttps://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIIGIIIR7.html"
   },
   {
     "objectID": "index.html#roche-au-grand-réticulé-complexe",
     "href": "index.html#roche-au-grand-réticulé-complexe",
     "title": "The Fringed Figures",
     "section": "Roche au grand réticulé complexe",
-    "text": "Roche au grand réticulé complexe\n\nEngraved rockEngravingsLocal view\n\n\n\n\n\n\n  \n\n\nhttps://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIVGIR10@c.html"
+    "text": "Roche au grand réticulé complexe\n\nLocationEngraved rockEngravingsLocal view\n\n\n\n  \n\n\n\n\n  \n\n\nhttps://iramat-apps.cnrs.fr/view/bego/roches/ZIV/ZIVGI/ZIVGIR10@c/P8270046.html\n\n\n\n\n  \n\n\nhttps://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIVGIR10@c.html"
   },
   {
     "objectID": "index.html#roche-des-figures-à-franges-et-du-double-zigzag",
@@ -21,52 +28,10 @@
     "text": "Roche des figures à franges et du double zigzag\n\nLocationEngraved rockEngravingsLocal view\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\n  \n\n\nhttps://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZXGIIIR5@l.html"
   },
   {
-    "objectID": "index.html#roche-du-grand-goulet-herbeux",
-    "href": "index.html#roche-du-grand-goulet-herbeux",
-    "title": "The Fringed Figures",
-    "section": "Roche du grand goulet herbeux",
-    "text": "Roche du grand goulet herbeux\n\nEngraved rockEngravingsLocal view\n\n\nTODO\n\n\n\n  \n\n\nhttps://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIIGIIIR7.html"
-  },
-  {
     "objectID": "index.html#superimpositions-and-associations",
     "href": "index.html#superimpositions-and-associations",
     "title": "The Fringed Figures",
     "section": "Superimpositions and associations",
     "text": "Superimpositions and associations\n\nRoche rougeRoche visible au soleil rasantRoche des six plages\n\n\n\n  \n\n\nhttps://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIGIR4B.html\n\n\n\n\n  \n\n\nhttps://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIIGIR9.html\n\n\n\n\n  \n\n\nhttps://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIGIR5.html"
-  },
-  {
-    "objectID": "index.html#superimpositions",
-    "href": "index.html#superimpositions",
-    "title": "The Fringed Figures",
-    "section": "Superimpositions",
-    "text": "Superimpositions\nhttps://iramat-apps.cnrs.fr/view/bego/varia/superpositions_v.html"
-  },
-  {
-    "objectID": "index.html#section",
-    "href": "index.html#section",
-    "title": "The Fringed Figures",
-    "section": "",
-    "text": "Animating content"
-  },
-  {
-    "objectID": "index.html#section-1",
-    "href": "index.html#section-1",
-    "title": "The Fringed Figures",
-    "section": "",
-    "text": "Animating content"
-  },
-  {
-    "objectID": "index.html#section-2",
-    "href": "index.html#section-2",
-    "title": "The Fringed Figures",
-    "section": "",
-    "text": "Animating content"
-  },
-  {
-    "objectID": "index.html#section-3",
-    "href": "index.html#section-3",
-    "title": "The Fringed Figures",
-    "section": "",
-    "text": "Animating content"
   }
 ]

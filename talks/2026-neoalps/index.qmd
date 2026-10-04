@@ -7,9 +7,9 @@ author:
       - id: cnrs
         name: <span style="font-size:17pt">IRAMAT-CNRS</span>
 title-slide-attributes:
-    data-background-image: "https://raw.githubusercontent.com/iramat/iramat-dev/master/img/ana-xrf-pymca-ex.png"
-    data-background-size: "90%"
-    data-background-opacity: "0.2"
+    data-background-image: "img/Lac Long Sup.jpg"
+    data-background-size: "100%"
+    data-background-opacity: "0.5"
     data-notes: Lorem
 format:
   revealjs: 
@@ -29,7 +29,7 @@ format:
     # self-contained: true
     # embed-resources: true
     # logo: https://raw.githubusercontent.com/zoometh/neonet/master/doc/img/neonet.png
-    footer: "T. Huet - <img src='https://raw.githubusercontent.com/zoometh/thomashuet/master/img/inst-neoalps26.png' style='height: 30px;vertical-align: middle;'> - XX October, 2026, Sion, Switzerland"
+    footer: "Thomas Huet - <img src='https://raw.githubusercontent.com/zoometh/thomashuet/master/img/inst-neoalps26.png' style='height: 25px;vertical-align: middle;'> colloque international, Sion (Valais, Suisse) 7-10 octobre 2026"
     margin: 0
     width: 1200
 ---
@@ -39,13 +39,13 @@ library(dplyr)
 library(kableExtra)
 ```
 
-# Site presentation {background-image="https://raw.githubusercontent.com/iramat/iramat-dev/master/img/iiif-pres-collection-multi.png" background-opacity=0.2 background-size="400px" background-repeat="repeat"}
+# Site presentation {background-image="img/Lac Long Sup.jpg" background-opacity=0.5}
 
-## Map
+## Site map
 
 ```{=html}
 <div class="iframe-figure">
-  <iframe width="1200" height="500"
+  <iframe width="1200" height="530"
           src="https://iramat-apps.cnrs.fr/project/bego/bego_roches_map.html"
           title="ZIGIR4B"></iframe>
 </div>
@@ -53,17 +53,126 @@ library(kableExtra)
 <div class="captiontext">Rocks with pecked engravings <https://iramat-apps.cnrs.fr/project/bego/bego_roches_map.html></div>
 
 
-# Figures à franges {background-image="https://raw.githubusercontent.com/iramat/iramat-dev/master/img/iiif-pres-collection-multi.png" background-opacity=0.2 background-size="400px" background-repeat="repeat"}
+# Fringed figures {background-image="img/Lac Long Sup.jpg" background-opacity=0.5}
 
+
+## Roche du grand goulet herbeux
+
+::: {.panel-tabset}
+
+
+### Location
+
+
+```{=html}
+<div class="iframe-figure">
+  <iframe width="1200" height="400"
+          src="https://iramat-apps.cnrs.fr/project/bego/bego_roches_map_2.3.7.html"
+          title="ZXGIIIR5@l"></iframe>
+</div>
+```
+
+### Engraved rock
+
+```{=html}
+<div class="iframe-figure">
+  <iframe width="1200" height="400"
+          src="https://iramat-apps.cnrs.fr/view/bego/roches/ZII/ZIIGIII/ZIIGIIIR7/P9050480.html"
+          title="ZIVGIR10@c"></iframe>
+</div>
+```
+<div class="captiontext"> <https://iramat-apps.cnrs.fr/view/bego/roches/ZII/ZIIGIII/ZIIGIIIR7/P9050480.html></div>
+
+
+### Engravings
+
+```{=html}
+<div class="iframe-figure">
+  <iframe width="1200" height="400"
+          src="https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIIGIIIR7.html"
+          title="ZIGIR4B"></iframe>
+</div>
+```
+<div class="captiontext"> <https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIIGIIIR7.html></div>
+
+### Local view
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/5.0.1/openseadragon.min.js"></script>
+
+<div id="panorama-ziigiiir7"
+     style="
+       width:100%;
+       height:400px;
+       background:#fff;
+       border-radius:4px;
+       overflow:hidden;">
+</div>
+
+<script>
+const viewerZIIGIIIR7 = OpenSeadragon({
+    id: "panorama-ziigiiir7",
+
+    prefixUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/openseadragon/5.0.1/images/",
+
+    tileSources: {
+        type: "image",
+        url: "https://iramat-apps.cnrs.fr/iiif/2/bego%2Froches%2FZII%2FZIIGIII%2FZIIGIIIR7%2Fdepuis%20ZIIGIIIR7.jpg/full/full/0/default.jpg"
+    },
+
+    showNavigationControl: false,
+    showNavigator: false,
+
+    visibilityRatio: 1,
+    constrainDuringPan: true,
+
+    gestureSettingsMouse: {
+        scrollToZoom: true,
+        clickToZoom: false,
+        dblClickToZoom: true
+    }
+});
+
+viewerZIIGIIIR7.addHandler("open", function () {
+    const homeZoom = viewerZIIGIIIR7.viewport.getHomeZoom();
+
+    viewerZIIGIIIR7.viewport.zoomTo(
+        homeZoom * 2,
+        viewerZIIGIIIR7.viewport.getCenter(),
+        true
+    );
+});
+</script>
+
+:::
 
 
 ## Roche au grand réticulé complexe
 
 ::: {.panel-tabset}
 
+### Location
+
+
+```{=html}
+<div class="iframe-figure">
+  <iframe width="1200" height="400"
+          src="https://iramat-apps.cnrs.fr/project/bego/bego_roches_map_4.1.10@c.html"
+          title="ZXGIIIR5@l"></iframe>
+</div>
+```
+
 ### Engraved rock
 
-![](https://iramat-apps.cnrs.fr/iiif/2/bego%2Froches%2FZIV%2FZIVGI%2FZIVGIR10%40c%2FP8270046.JPG/full/full/0/default.jpg){height=400}
+```{=html}
+<div class="iframe-figure">
+  <iframe width="1200" height="400"
+          src="https://iramat-apps.cnrs.fr/view/bego/roches/ZIV/ZIVGI/ZIVGIR10@c/P8270046.html"
+          title="ZIVGIR10@c"></iframe>
+</div>
+```
+<div class="captiontext"> <https://iramat-apps.cnrs.fr/view/bego/roches/ZIV/ZIVGI/ZIVGIR10@c/P8270046.html></div>
+
 
 ### Engravings
 
@@ -72,7 +181,7 @@ library(kableExtra)
 <div class="iframe-figure">
   <iframe width="1200" height="400"
           src="https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIVGIR10@c.html"
-          title="ZIGIR4B"></iframe>
+          title="ZIVGIR10@c"></iframe>
 </div>
 ```
 <div class="captiontext"> <https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIVGIR10@c.html></div>
@@ -277,73 +386,6 @@ viewerHL2.addHandler("open", function () {
 
 :::
 
-## Roche du grand goulet herbeux
-
-::: {.panel-tabset}
-
-### Engraved rock
-
-TODO
-
-### Engravings
-
-```{=html}
-<div class="iframe-figure">
-  <iframe width="1200" height="500"
-          src="https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIIGIIIR7.html"
-          title="ZIGIR4B"></iframe>
-</div>
-```
-<div class="captiontext"> <https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIIGIIIR7.html></div>
-
-### Local view
-
-<div id="panorama-ziigiiir7"
-     style="
-       width:100%;
-       height:500px;
-       background:#fff;
-       border-radius:4px;
-       overflow:hidden;">
-</div>
-
-<script>
-const viewerZIIGIIIR7 = OpenSeadragon({
-    id: "panorama-ziigiiir7",
-
-    prefixUrl:
-      "https://cdnjs.cloudflare.com/ajax/libs/openseadragon/5.0.1/images/",
-
-    tileSources: {
-        type: "image",
-        url: "https://iramat-apps.cnrs.fr/iiif/2/bego%2Froches%2FZII%2FZIIGIII%2FZIIGIIIR7%2Fdepuis%20ZIIGIIIR7.jpg/full/full/0/default.jpg"
-    },
-
-    showNavigationControl: false,
-    showNavigator: false,
-
-    visibilityRatio: 1,
-    constrainDuringPan: true,
-
-    gestureSettingsMouse: {
-        scrollToZoom: true,
-        clickToZoom: false,
-        dblClickToZoom: true
-    }
-});
-
-viewerZIIGIIIR7.addHandler("open", function () {
-    const homeZoom = viewerZIIGIIIR7.viewport.getHomeZoom();
-
-    viewerZIIGIIIR7.viewport.zoomTo(
-        homeZoom * 2,
-        viewerZIIGIIIR7.viewport.getCenter(),
-        true
-    );
-});
-</script>
-
-:::
 
 ## Superimpositions and associations
 
@@ -386,41 +428,3 @@ viewerZIIGIIIR7.addHandler("open", function () {
 :::
 
 
-# Annexes
-
-## Superimpositions
-
-https://iramat-apps.cnrs.fr/view/bego/varia/superpositions_v.html
-
-## {auto-animate=true}
-
-
-::: {style="margin-top: 100px;"}
-Animating content
-![](img/var_extrin.jpg){height=500}
-:::
-
-## {auto-animate=true}
-
-
-::: {style="margin-top: 100px;"}
-Animating content
-![](img/var_intrin.jpg){height=500}
-![](img/var_extrin.jpg){height=500}
-:::
-
-## {auto-animate=true}
-
-::: {style="margin-top: 100px;"}
-Animating content
-![](img/fig 2.jpg){height=500}
-![](img/var_intrin.jpg){height=500}
-:::
-
-## {auto-animate=true}
-
-::: {style="margin-top: 100px;"}
-Animating content
-![](img/fig 2.jpg){height=500}
-![](img/var_intrin.jpg){height=500}
-:::
