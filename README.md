@@ -1,6 +1,10 @@
 # Bego
 > Système d'information
 
+## Communications
+
+- [Les "Figures à franges"](https://zoometh.github.io/bego/talks/2026-neoalps/pres), colloque NeoAlps, novembre 2026
+
 ## Architecture actuelle
 
 
