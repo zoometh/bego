@@ -46,12 +46,91 @@ library(kableExtra)
 ```{=html}
 <div class="iframe-figure">
   <iframe width="1200" height="530"
-          src="https://iramat-apps.cnrs.fr/project/bego/bego_roches_map.html"
+          src="https://iramat-apps.cnrs.fr/project/bego/map/bego_roches_map.html"
           title="ZIGIR4B"></iframe>
 </div>
 ```
 <div class="captiontext">Rocks with pecked engravings <https://iramat-apps.cnrs.fr/project/bego/bego_roches_map.html></div>
 
+
+## Pecked engravings
+
+:::: {.columns}
+
+::: {.column width="50%"}
+![](img/fig4_Antiquity_Typology_Site_eng.jpg){height=500}
+:::
+
+::: {.column width="50%"}
+![](img/Matrice de Harris_2_english.bmp){height=500}
+:::
+
+::::
+
+## Archaeological evidences
+
+
+::: {.panel-tabset}
+
+### Overview
+
+:::: {.columns}
+
+::: {.column width="50%"}
+<iframe
+  src="https://iramat-apps.cnrs.fr/project/bego/doc/mobilier_MM_MC_1.pdf"
+  width="100%"
+  height="350px"
+  style="border: none;">
+</iframe>
+:::
+
+::: {.column width="50%"}
+<iframe
+  src="https://iramat-apps.cnrs.fr/project/bego/doc/mobilier_ST_1.pdf"
+  width="100%"
+  height="350px"
+  style="border: none;">
+</iframe>
+:::
+
+::::
+
+<div class="captiontext">Archaeological material from the Musée des Merveilles, Museo civico di Cuneo, and Sopreintendenza di Torino [^3].</div>
+
+[^3]: Study by: D. Binder, N. Bianchi, T. Huet, C. Lepère and S. Sandrone, CC-BY-4.0
+
+### In connection with rock art
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{=html}
+<div class="iframe-figure">
+  <iframe width="600" height="400"
+          src="https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZVIIGIR8_.html"
+          title="CdT"></iframe>
+</div>
+```
+<div class="captiontext"> <https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZVIIGIR8.html></div>
+:::
+
+::: {.column width="50%"}
+<table>
+  <tr>
+    <td>![](img/Lamelle__md.jpg){height=300}</td>
+    <td>![](img/Stèle du Chef.jpg){height=300}</td>
+  </tr>
+</table>
+<div class="captiontext">Bedouin blond flint blade with heat treatment, Late Chassean (4050-3500 BCE). Lumley et al. 1995[^1], Lumley et al. 2010[^2]</div>
+:::
+
+::::
+
+:::
+
+[^1]: Lorem Ipsum
+[^2]: Ipsum Lorem
 
 # Fringed figures {background-image="img/Lac Long Sup.jpg" background-opacity=0.5}
 
@@ -67,7 +146,7 @@ library(kableExtra)
 ```{=html}
 <div class="iframe-figure">
   <iframe width="1200" height="400"
-          src="https://iramat-apps.cnrs.fr/project/bego/bego_roches_map_2.3.7.html"
+          src="https://iramat-apps.cnrs.fr/project/bego/map/bego_roches_map_2.3.7.html"
           title="ZXGIIIR5@l"></iframe>
 </div>
 ```
@@ -157,7 +236,7 @@ viewerZIIGIIIR7.addHandler("open", function () {
 ```{=html}
 <div class="iframe-figure">
   <iframe width="1200" height="400"
-          src="https://iramat-apps.cnrs.fr/project/bego/bego_roches_map_4.1.10@c.html"
+          src="https://iramat-apps.cnrs.fr/project/bego/map/bego_roches_map_4.1.10@c.html"
           title="ZXGIIIR5@l"></iframe>
 </div>
 ```
@@ -257,7 +336,7 @@ viewerZIVGIR10.addHandler("open", function () {
 ```{=html}
 <div class="iframe-figure">
   <iframe width="1200" height="400"
-          src="https://iramat-apps.cnrs.fr/project/bego/bego_roches_map_10.3.5@l.html"
+          src="https://iramat-apps.cnrs.fr/project/bego/map/bego_roches_map_10.3.5@l.html"
           title="ZXGIIIR5@l"></iframe>
 </div>
 ```
@@ -426,5 +505,12 @@ viewerHL2.addHandler("open", function () {
 <div class="captiontext"> <https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZIGIR5.html></div>
 
 :::
+
+# Discussion {background-image="img/Lac Long Sup.jpg" background-opacity=0.5}
+
+## XXX
+
+
+![](img/huet_fig08.jpg){height=500}
 
 
