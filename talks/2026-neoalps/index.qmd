@@ -1,6 +1,6 @@
 ---
 title: "The Fringed Figures"
-subtitle: "_Figures à franges (mont Bego, Alpes-Maritimes, France)_"
+subtitle: "_Les figures dites 'à franges' (mont Bego, Alpes-Maritimes, France)_"
 author:
   - name: Thomas Huet
     affiliation: 
@@ -29,7 +29,7 @@ format:
     # self-contained: true
     # embed-resources: true
     # logo: https://raw.githubusercontent.com/zoometh/neonet/master/doc/img/neonet.png
-    footer: "Thomas Huet - <img src='https://raw.githubusercontent.com/zoometh/thomashuet/master/img/inst-neoalps26.png' style='height: 25px;vertical-align: middle;'> colloque international, Sion (Valais, Suisse) 7-10 octobre 2026"
+    footer: "<small>Thomas Huet - <img src='https://raw.githubusercontent.com/zoometh/thomashuet/master/img/inst-neoalps26.png' style='height: 20px;vertical-align: middle;'> colloque international, Sion (Valais, Suisse) 7-10 octobre 2026</small>"
     margin: 0
     width: 1200
 ---
@@ -39,7 +39,31 @@ library(dplyr)
 library(kableExtra)
 ```
 
+
 # Site presentation {background-image="img/Lac Long Sup.jpg" background-opacity=0.5}
+
+
+<style>
+table.borderless {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: none !important;
+}
+
+table.borderless td,
+table.borderless th {
+  border: none !important;
+  padding: 0 !important;
+  text-align: center;
+  vertical-align: middle;
+  background: transparent !important;
+}
+
+table.borderless img {
+  display: block;
+  margin: 0 auto;
+}
+</style>
 
 ## Site map
 
@@ -55,17 +79,33 @@ library(kableExtra)
 
 ## Pecked engravings
 
+::: {.panel-tabset}
+
+### Corpus and methods
+
 :::: {.columns}
 
 ::: {.column width="50%"}
-![](img/fig4_Antiquity_Typology_Site_eng.jpg){height=500}
+![](img/fig4_Antiquity_Typology_Site_eng.jpg){height=430 width=auto}
 :::
 
 ::: {.column width="50%"}
-![](img/Matrice de Harris_2_english.bmp){height=500}
+![](img/Matrice de Harris_2_english.bmp){height=430 width=auto}
 :::
 
 ::::
+
+### Periodisation
+
+<center>
+
+![](img/Figure synth_se copie.jpg){height=430 width=auto}
+
+</center>
+
+:::
+
+
 
 ## Archaeological evidences
 
@@ -74,31 +114,7 @@ library(kableExtra)
 
 ### Overview
 
-:::: {.columns}
-
-::: {.column width="50%"}
-<iframe
-  src="https://iramat-apps.cnrs.fr/project/bego/doc/mobilier_MM_MC_1.pdf"
-  width="100%"
-  height="350px"
-  style="border: none;">
-</iframe>
-:::
-
-::: {.column width="50%"}
-<iframe
-  src="https://iramat-apps.cnrs.fr/project/bego/doc/mobilier_ST_1.pdf"
-  width="100%"
-  height="350px"
-  style="border: none;">
-</iframe>
-:::
-
-::::
-
-<div class="captiontext">Archaeological material from the Musée des Merveilles, Museo civico di Cuneo, and Sopreintendenza di Torino [^3].</div>
-
-[^3]: Study by: D. Binder, N. Bianchi, T. Huet, C. Lepère and S. Sandrone, CC-BY-4.0
+![](img/Planche mobilier sélection.jpg){height=420 width=auto}
 
 ### In connection with rock art
 
@@ -116,21 +132,26 @@ library(kableExtra)
 :::
 
 ::: {.column width="50%"}
-<table>
+<table style="border-color: transparent;">
   <tr>
-    <td>![](img/Lamelle__md.jpg){height=300}</td>
-    <td>![](img/Stèle du Chef.jpg){height=300}</td>
+    <td><small>A.</small><br>![](img/Stèle du Chef.jpg){height=250 width=auto}</td>
+    <td><small>B.</small><br>![](img/Lamelle__md.jpg){height=250 width=auto}</td>
   </tr>
 </table>
-<div class="captiontext">Bedouin blond flint blade with heat treatment, Late Chassean (4050-3500 BCE). Lumley et al. 1995[^1], Lumley et al. 2010[^2]</div>
+<div class="captiontext">Bedouin blond flint blade with heat treatment, Late Chassean (4050-3500 BCE) ; A. Lumley et al. 2010[^2], B. Lumley et al. 1995</div>
 :::
 
 ::::
 
 :::
 
-[^1]: Lorem Ipsum
-[^2]: Ipsum Lorem
+[^2]: de Lumley, H., Echassoux, A., Romain, O., Barsky, D., Grégoire, S., & Saos, T. (2010). Une lame de faucille sous la stèle gravée Chalcolithique dite du «Chef de tribu», Vallée des Merveilles, région du Mont Bego, Tende, Alpes-Maritimes. _L'anthropologie_, 114(4), 445-468
+
+
+## <small>Mont Bego and "mainstream" archaeology: a divorce</small>
+
+![](img/Cérémoniel de la foudre.jpg){height=500 width=auto}
+<div class="captiontext">Lumley and Echassoux, 2011</div>
 
 # Fringed figures {background-image="img/Lac Long Sup.jpg" background-opacity=0.5}
 
@@ -508,9 +529,51 @@ viewerHL2.addHandler("open", function () {
 
 # Discussion {background-image="img/Lac Long Sup.jpg" background-opacity=0.5}
 
-## XXX
+## "Pseudo-idols"
+
+![](img/pseudoidole.jpg){width=1400 height=auto}
+
+<div class="captiontext">after Huet 2018. [1] La Pierre aux Fées 1 stele (Bourgogne-Franche-Comté, France)[^20]; [2] Jaillance stele (Auvergne-Rhône-Alpes, France)[^21]; [3-4] Rochers du mont Bego (Tende, Alpes-Maritimes)[^22]</div>
+
+[^20]: after Cassen et al. 2017
+[^21]: after Picavet, Beeching, Brochier et Vital (CAPRA Valence)
+[^22]: after Laboratoire départemental de Préhistoire du Lazaret
+
+## <small>Hieratic "radiant" anthropomorphic figures</small>
+
+<table style="border: none; border-collapse: collapse; width: 100%;">
+  <tr>
+    <td style="border: none; text-align: center; vertical-align: middle;">
+      <img src="img/PdP_zza.jpg" style="height: 400px; width: auto; max-width: 100%;">
+    </td>
+    <td style="border: none; text-align: center; vertical-align: middle;">
+      <img src="img/ZIIGIIIR7-1.jpg" style="height: 400px; width: auto; max-width: 100%;">
+    </td>
+    <td style="border: none; text-align: center; vertical-align: middle;">
+      <img src="img/scene_.jpg" style="height: 400px; width: auto; max-width: 100%;">
+    </td>
+    <td style="border: none; text-align: center; vertical-align: middle;">
+      <img src="img/barnenez_J.jpg" style="height: 400px; width: auto; max-width: 100%;">
+    </td>
+  </tr>
+  <tr>
+    <td style="border: none; text-align: center;">
+      <small>Pla de Petracos (Valencian Country, Spain)[^10]</small>
+    </td>
+    <td style="border: none; text-align: center;">
+      <small>Mont Bego (Alpes-Maritimes, France)[^11]</small>
+    </td>
+    <td style="border: none; text-align: center;">
+      <small>Vallée aux Noirs 6 (Paris Basin, France)[^12]</small>
+    </td>
+    <td style="border: none; text-align: center;">
+      <small>Barnenez J (Brittany, France)[^13]</small>
+    </td>
+  </tr>
+</table>
 
 
-![](img/huet_fig08.jpg){height=500}
-
-
+[^10]: after Ramos 2014
+[^11]: credits: D. Ponsard, Musée de l'Homme, Paris
+[^12]: after Cassen et al. 2017
+[^13]: credits: Philippe Berthé, Centre des monuments nationaux, https://www.barnenez.fr/decouvrir/l-art-megalithique

@@ -1,4 +1,35 @@
 
+## "Pseudo-idoles"
+
+![](img/pseudoidole.jpg){width=1400}
+
+<div class="captiontext">[1] La Pierre aux Fées 1 stele (Bourgogne-Franche-Comté, France)[^20]; [2] Jaillance stele (Auvergne-Rhône-Alpes, France)[^21]; [3-4] Rochers du mont Bego (Tende, Alpes-Maritimes)[^22]</div>
+
+[^20]: after Cassen et al. 2017
+[^21]: after Picavet, Beeching, Brochier et Vital (CAPRA Valence)
+[^22]: after Laboratoire départemental de Préhistoire du Lazaret
+
+
+## Anthropomorphes hiéatiques "rayonnnants"
+
+<table>
+  <tr>
+    <td>![](img/PdP_zza.jpg){height=300}</td>
+    <td>![](img/ZIIGIIIR7-1.jpg){height=300}</td>
+    <td>![](img/scene_.jpg){height=300}</td>
+    <td>![](img/barnenez_J.jpg){height=300}</td>
+  </tr>
+</table>
+<div class="captiontext">From left to right: Pla de Petracos (Valencian Country, Spain) con[^10], mont Bego (Alpes-Maritimes, France)[^11], Vallée aux Noirs 6 (Paris Basin, France)[^12], Barnenez J (Brittany, France)[^13]</div>
+
+
+[^10]: after Ramos 2014
+[^11]: credits: D. Ponsard, Musée de l'Homme, Paris
+[^12]: after Cassen et al. 2017
+[^13]: credits: Philippe Berthé, Centre des monuments nationaux, https://www.barnenez.fr/decouvrir/l-art-megalithique
+
+
+
 ## {auto-animate=true}
 
 
@@ -107,7 +138,34 @@ OpenSeadragon({
 
 ![](img/ZXGIIIR5@l_Hl.png){height=500}
 
-# Annexes
+# OFFF
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+<iframe
+  src=""
+  width="100%"
+  height="350px"
+  style="border: none;">
+</iframe>
+:::
+
+::: {.column width="50%"}
+<iframe
+  src="https://iramat-apps.cnrs.fr/project/bego/doc/mobilier_ST_1.pdf"
+  width="100%"
+  height="350px"
+  style="border: none;">
+</iframe>
+:::
+
+::::
+
+<div class="captiontext">Archaeological material from the Musée des Merveilles, Museo civico di Cuneo, and Sopreintendenza di Torino [^3].</div>
+
+[^3]: Study by: D. Binder, N. Bianchi, T. Huet, C. Lepère and S. Sandrone, CC-BY-4.0
 
 ## Superimpositions
 
