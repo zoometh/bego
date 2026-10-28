@@ -539,7 +539,48 @@ viewerHL2.addHandler("open", function () {
 [^21]: after Picavet, Beeching, Brochier et Vital (CAPRA Valence)
 [^22]: after Laboratoire départemental de Préhistoire du Lazaret
 
-## <small>Hieratic "radiant" anthropomorphic figures</small>
+## Bego's _Skin_ figures
+
+::: {.panel-tabset}
+
+
+### ZXVII.GII.R 46 γ
+
+```{=html}
+<div class="iframe-figure">
+  <iframe width="1200" height="400"
+          src="https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZXVIIGIIR46@c.html"
+          title="ZXVIIGIIR46@c"></iframe>
+</div>
+```
+<div class="captiontext"> <https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZXVIIGIIR46@c.html></div>
+
+### ZXVII.GII.R 64 α
+
+```{=html}
+<div class="iframe-figure">
+  <iframe width="1200" height="400"
+          src="https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZXVIIGIIR64@a.html"
+          title="ZXVIIGIIR64@a"></iframe>
+</div>
+```
+<div class="captiontext"> <https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZXVIIGIIR64@a.html></div>
+
+### ZXVIII.GII.R 77 α
+
+```{=html}
+<div class="iframe-figure">
+  <iframe width="1200" height="400"
+          src="https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZXVIIIGIIR77@a.html"
+          title="ZXVIIIGIIR77@a"></iframe>
+</div>
+```
+<div class="captiontext"> <https://iramat-apps.cnrs.fr/view/bego/prj/neoalps/ZXVIIIGIIR77@a.html></div>
+
+:::
+
+
+## Hieratic "radiant" anthropomorphic figures
 
 <table style="border: none; border-collapse: collapse; width: 100%;">
   <tr>
