@@ -1,0 +1,1 @@
+(()=>{document.addEventListener("DOMContentLoaded",()=>{document.querySelectorAll("a.lightbox").forEach(t=>{t.addEventListener("click",n=>{n.preventDefault();let e=document.createElement("div");e.className="lightbox-overlay";let d=document.createElement("img");d.src=t.href,e.appendChild(d),document.body.appendChild(e),e.addEventListener("click",()=>{e.remove()})})})});})();
